@@ -1,0 +1,167 @@
+.header {
+  display: flex;
+  background: linear-gradient(to top, rgb(236, 236, 236), white);
+  width: 100vw;
+  height: 66px;
+  position: fixed;
+  top: 0px;
+  z-index: 25;
+}
+
+.header a {
+  text-decoration: none;
+  color: black;
+}
+
+#menuControl {
+  position: absolute;
+  top: -100%;
+  opacity: 0;
+}
+
+#menuControl:checked ~ .rwdMenu {
+  right: 0px;
+}
+
+#menuControl:checked ~ .background {
+  left: 0px;
+}
+
+.menuBtn {
+  height: 46px;
+  width: 46px;
+  border-radius: 5px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.menuBtn::before {
+  content: "";
+  background-color: black;
+  height: 4px;
+  width: 38px;
+  position: absolute;
+  left: 2px;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+  box-shadow: 0px 11px black, 0px -11px black;
+  border-radius: 50px;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-color: darkgray;
+  opacity: 0.6;
+  position: absolute;
+  left: -100%;
+  z-index: 28;
+}
+
+.close {
+  position: relative;
+  width: 100%;
+}
+.close::before, .close::after {
+  content: "";
+  background-color: black;
+  width: 35px;
+  height: 3px;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+.close::before { transform: rotate(45deg); }
+.close::after { transform: rotate(-45deg); }
+
+.rwdMenu {
+  width: 65vw;
+  height: 100vh;
+  background-color: rgb(245, 245, 247);
+  position: absolute;
+  right: -100%;
+  transition: 0.5s;
+  z-index: 30;
+}
+
+.rwdMenu ul {
+  padding: 0px 6px;
+  margin-top: 66px;
+}
+
+.rwdMenu li {
+  font-size: 1rem;
+  border-bottom: 2px solid gray;
+  padding: 12px;
+}
+
+.rwdMenu li:active {
+  text-shadow: 3px 3px 6px rgb(36, 36, 36);
+}
+
+.logo {
+  margin-left: 50px;
+}
+
+.logo img {
+  width: 100px;
+  height: 50px;
+  margin-top: 5px;
+}
+
+.logIn {
+  display: flex;
+  position: absolute;
+  right: 85px;
+  top: 17px;
+}
+
+.logIn span {
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  padding-top: 12px;
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.logIn li {
+  position: relative;
+  margin-left: 20px;
+}
+
+@media screen and (min-width: 992px) {
+  .menuBtn, .close { display: none; }
+  .rwdMenu ul {
+    display: flex;
+    padding: 0px;
+  }
+  .rwdMenu {
+    position: absolute;
+    left: 41%;
+    top: -66px;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+  }
+  .rwdMenu li {
+    padding: 0px 15px;
+    border-bottom: 0;
+    height: 66px;
+    display: flex;
+    align-items: center;
+  }
+  .rwdMenu li:hover {
+    border-bottom: 3px solid black;
+  }
+
+  .logIn {
+    right: 30px;
+  }
+}

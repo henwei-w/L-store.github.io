@@ -1,0 +1,24 @@
+.footer {
+  background-color: rgb(220, 220, 220);
+  width: 100%;
+  height: 8rem;
+  padding: 35px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.copyRight {
+  font-size: 0.8rem;
+}
+
+.footerText {
+  font-size: 1rem;
+}
+
+.footerText p {
+  margin-top: 15px;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+}

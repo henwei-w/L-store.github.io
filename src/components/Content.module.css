@@ -1,0 +1,39 @@
+.content {
+  padding: 25px;
+}
+
+.eventTitle {
+  font-size: 1.2rem;
+  margin: 20px 0px;
+  text-align: center;
+}
+
+.itemBackground {
+  width: calc( 100vw - 50px );
+  margin: auto;
+}
+
+.eventItem {
+  display: flex;
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.event img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.eventText {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  font-size: 1.1rem;
+  font-weight: bolder;
+  line-height: 1.8rem;
+  letter-spacing: 0.1rem;
+  padding: 18px;
+  background-color: rgb(236, 129, 68);
+}
