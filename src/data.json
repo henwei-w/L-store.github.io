@@ -1,6 +1,6 @@
 [
   {
-    "name":"長版羊毛大衣-棕",
+    "name":"長版羊毛大衣",
     "price":"2490",
     "img":"/image/w-coat-1.jpg",
     "size":["S","M","L"],
@@ -10,7 +10,7 @@
   },
 
   {
-    "name":"長版羊毛大衣-綠",
+    "name":"長版羊毛大衣",
     "price":"2490",
     "img":"/image/w-coat-2.jpg",
     "size":["S","M","L"],
@@ -30,7 +30,7 @@
   },
 
   {
-    "name":"造型運動長袖-淺綠",
+    "name":"造型運動長袖",
     "price":"890",
     "img":"/image/w-sports-1.jpg",
     "size":["S","M","L","XL"],
@@ -44,13 +44,13 @@
     "price":"590",
     "img":"/image/w-shirt-1.jpg",
     "size":["S","M","L","XL"],
-    "color":[["rgb(233,213,163)",""]],
+    "color":[["rgb(233,213,163)","Default"]],
     "location":["women","上衣","4"],
     "id":"w-4"
   },
                       
   {
-    "name":"純棉長袖-棕",
+    "name":"純棉長袖",
     "price":"590",
     "img":"/image/w-shirt-2.jpg",
     "size":["S","M","L","XL"],
@@ -60,7 +60,7 @@
   },
       
   {
-    "name":"短版透氣上衣-灰",
+    "name":"短版透氣上衣",
     "price":"590",
     "img":"/image/w-shirt-3.jpg",
     "size":["S","M","L","XL"],
@@ -74,13 +74,13 @@
     "price":"790",
     "img":"/image/w-pants-1.jpg",
     "size":["S","M","L"],
-    "color":[["rgb(127,157,183)",""]],
+    "color":[["rgb(127,157,183)","Default"]],
     "location":["women","下身","7"],
     "id":"w-7"
   },
         
   {
-    "name":"休閒透氣長褲-灰",
+    "name":"休閒透氣長褲",
     "price":"790",
     "img":"/image/w-pants-2.jpg",
     "size":["S","M","L"],
@@ -90,7 +90,7 @@
   },
 
   {
-    "name":"質感連身洋裝-黑",
+    "name":"質感連身洋裝",
     "price":"1290",
     "img":"/image/dress-1.jpg",
     "size":["S","M"],
@@ -104,23 +104,23 @@
     "price":"1290",
     "img":"/image/dress-2.jpg",
     "size":["S","M"],
-    "color":[["rgb(73,64,59)",""]],
+    "color":[["rgb(73,64,59)","Default"]],
     "location":["women","洋裝","10"],
     "id":"w-10"
   },
 
   {
-    "name":"復古丹寧帽-淺色",
+    "name":"復古丹寧帽",
     "price":"590",
     "img":"/image/w-hat-1.jpg",
     "size":["M"],
-    "color":[["rgb(38,162,202)",""]],
+    "color":[["rgb(38,162,202)","Default"]],
     "location":["women","配件","11"],
     "id":"w-11"
   },
 
   {
-    "name":"純棉長袖-黑",
+    "name":"純棉長袖",
     "price":"790",
     "img":"/image/m-shirt-4.jpg",
     "size":["M","L","XL"],
@@ -140,7 +140,7 @@
   },
 
   {
-    "name":"質感西裝外套-灰",
+    "name":"質感西裝外套",
     "price":"1990",
     "img":"/image/m-coat-4.jpg",
     "size":["S","M","L","XL"],
@@ -150,7 +150,7 @@
   },
       
   {
-    "name":"西裝外套-灰",
+    "name":"西裝外套",
     "price":"1490",
     "img":"/image/m-coat-1.jpg",
     "size":["S","M","L","XL"],
@@ -160,7 +160,7 @@
   },
 
   {
-    "name":"西裝外套-藍",
+    "name":"西裝外套",
     "price":"1490",
     "img":"/image/m-coat-2.jpg",
     "size":["S","M","L","XL"],
@@ -170,7 +170,7 @@
   },
 
   {
-    "name":"運動套裝-黑",
+    "name":"運動套裝",
     "price":"890",
     "img":"/image/m-sports-1.jpg",
     "size":["M","L","XL"],
@@ -180,7 +180,7 @@
   },
 
   {
-    "name":"造型運動套裝-藍",
+    "name":"造型運動套裝",
     "price":"890",
     "img":"/image/m-sports-2.jpg",
     "size":["M","L","XL"],
@@ -190,7 +190,7 @@
   },
 
   {
-    "name":"涼感透氣短袖-白",
+    "name":"涼感透氣短袖",
     "price":"590",
     "img":"/image/m-shirt-1.jpg",
     "size":["S","M","L","XL"],
@@ -210,7 +210,7 @@
   },
 
   {
-    "name":"輕薄休閒襯衫-卡其",
+    "name":"輕薄休閒襯衫",
     "price":"790",
     "img":"/image/m-shirt-2.jpg",
     "size":["S","M","L","XL"],
@@ -220,7 +220,7 @@
   },
 
   {
-    "name":"輕薄休閒襯衫-藍",
+    "name":"輕薄休閒襯衫",
     "price":"790",
     "img":"/image/m-shirt-3.jpg",
     "size":["S","M","L","XL"],
@@ -230,7 +230,7 @@
   },
 
   {
-    "name":"質感鴨舌帽-白",
+    "name":"質感鴨舌帽",
     "price":"590",
     "img":"/image/m-hat-1.jpg",
     "size":["M"],
@@ -240,7 +240,7 @@
   },
 
   {
-    "name":"質感襯衫-灰",
+    "name":"質感襯衫",
     "price":"590",
     "img":"/image/k-shirt-1.jpg",
     "size":["S","M","L"],
@@ -250,7 +250,7 @@
   },
 
   {
-    "name":"透氣短袖-白",
+    "name":"透氣短袖",
     "price":"390",
     "img":"/image/k-shirt-2.jpg",
     "size":["S","M","L"],
@@ -264,7 +264,7 @@
     "price":"590",
     "img":"/image/k-pants-1.jpg",
     "size":["S","M","L"],
-    "color":[["rgb(52,55,67)",""]],
+    "color":[["rgb(52,55,67)","Default"]],
     "location":["kids","下身","26"],
     "id":"k-2"
   },
@@ -274,13 +274,13 @@
     "price":"790",
     "img":"/image/k-coat-1.jpg",
     "size":["S","M","L"],
-    "color":[["rgb(31,42,41)",""]],
+    "color":[["rgb(31,42,41)","Default"]],
     "location":["kids","外套","27"],
     "id":"k-3"
   },
 
   {
-    "name":"造型洋裝-粉",
+    "name":"造型洋裝",
     "price":"390",
     "img":"/image/k-dress-1.jpg",
     "size":["S","M","L"],

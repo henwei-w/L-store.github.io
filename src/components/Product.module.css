@@ -8,15 +8,6 @@
   margin: auto;
 }
 
-.changePage {
-  margin-top: 20px;
-}
-
-.changePage a {
-  text-decoration: none;
-  color: black;
-}
-
 @media screen and (min-width: 768px) {
   .wrap {
     width: 60vw;

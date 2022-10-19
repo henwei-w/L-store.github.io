@@ -4,6 +4,7 @@ import { createContext } from 'react';
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import ShoppingCart from './components/ShoppingCart';
 import WomenPage from './components/WomenPage';
 import MenPage from './components/MenPage';
 import KidsPage from './components/KidsPage';
@@ -14,6 +15,29 @@ import Footer from './components/Footer';
 
 const data = require("./data.json")
 export const content = createContext(data)
+
+let cartData = JSON.parse(localStorage.getItem("cart")) || []
+
+let setCartAmount;
+
+const setCart = (orderData, orderAmount) => {
+  cartData = orderData;
+  setCartAmount(orderAmount);
+}
+
+const setChangeAmount =(data) => {
+  setCartAmount(data)
+}
+
+const setAmount = (set) => {setCartAmount = set}
+
+
+export const getCart = createContext(setCart)
+export const set = createContext(setAmount)
+export const changeAmount = createContext(setChangeAmount)
+export const cart = createContext(cartData)
+
+
 
 function App() {
 
@@ -29,6 +53,9 @@ function App() {
         <Routes>
 
           <Route path="/" element={ <Home /> } />
+
+          <Route path="/cart" element={ <ShoppingCart /> } />
+
 
           <Route path="/women" element={ <WomenPage /> }>
             <Route path=":type" element={ <WomenPage /> }>

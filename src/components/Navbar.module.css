@@ -21,6 +21,7 @@
 
 #menuControl:checked ~ .rwdMenu {
   right: 0px;
+  z-index: 35;
 }
 
 #menuControl:checked ~ .background {
@@ -92,7 +93,7 @@
 }
 
 .rwdMenu li {
-  font-size: 1rem;
+  font-size: 1.2rem;
   border-bottom: 2px solid gray;
   padding: 12px;
 }
@@ -116,6 +117,7 @@
   position: absolute;
   right: 85px;
   top: 17px;
+  z-index: 30;
 }
 
 .logIn span {
