@@ -1,30 +1,67 @@
+import { Link, useParams } from "react-router-dom";
+import styled from "styled-components";
 
-import styles from "./ProductMenu.module.css";
-import { Link,useParams } from "react-router-dom";
+const Menu = styled.div`
+  margin-top: 66px;
+`;
 
+const WpMenu = styled.div`
+  width: 100%;
+  height: 80px;
+  background-color: rgb(245, 245, 245);
+  position: fixed;
 
+  & ul {
+    display: flex;
+    justify-content: space-around;
+    max-width: 450px;
+    height: 100%;
+    margin: auto;
+  }
+
+  & li {
+    font-size: 1.1rem;
+    height: 100%;
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      border-bottom: 3px solid black;
+    }
+  }
+
+  & a {
+    text-decoration: none;
+    color: black;
+  }
+`;
+
+const Block = styled.div`
+  width: 100%;
+  height: 80px;
+`;
 
 function ProductMenu(props) {
-
-  const menuTitle = props.menu
-  const path = props.path
-  const params = useParams()
+  const menuTitle = props.menu;
+  const path = props.path;
+  const params = useParams();
 
   return (
-    <div className={styles.ProductMenu}>
-
-      <div className={styles.wpMenu}>
+    <Menu>
+      <WpMenu>
         <ul>
-
-          { menuTitle.map((data, index) => <Link key={index} to={`/${path}/${params.type = data}`}><li>{data}</li></Link>) }
-
+          {menuTitle.map((data, index) => (
+            <Link key={index} to={`/${path}/${(params.type = data)}`}>
+              <li>{data}</li>
+            </Link>
+          ))}
         </ul>
-      </div>
+      </WpMenu>
 
-      <div className={styles.block} />
-
-    </div>
-  )
+      <Block />
+    </Menu>
+  );
 }
 
 export default ProductMenu;

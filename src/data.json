@@ -5,8 +5,8 @@
     "img":"/image/w-coat-1.jpg",
     "size":["S","M","L"],
     "color":[["rgb(170,88,43)","棕色"]],
-    "location":["women","外套","0"],
-    "id":"w-0"
+    "location":"women",
+    "id":"001"
   },
 
   {
@@ -15,8 +15,8 @@
     "img":"/image/w-coat-2.jpg",
     "size":["S","M","L"],
     "color":[["rgb(95,97,87)","墨綠色"]],
-    "location":["women","外套","1"],
-    "id":"w-1"
+    "location":"women",
+    "id":"002"
   },
 
   {
@@ -25,8 +25,8 @@
     "img":"/image/w-coat-3.jpg",
     "size":["S","M","L"],
     "color":[["rgb(170,157,161)","米色"],["rgb(49,48,45)","灰色"]],
-    "location":["women","外套","2"],
-    "id":"w-2"
+    "location":"women",
+    "id":"003"
   },
 
   {
@@ -35,8 +35,8 @@
     "img":"/image/w-sports-1.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(192,214,164)","淺綠色"]],
-    "location":["women","上衣","3"],
-    "id":"w-3"
+    "location":"women",
+    "id":"004"
   },
 
   {
@@ -45,8 +45,8 @@
     "img":"/image/w-shirt-1.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(233,213,163)","Default"]],
-    "location":["women","上衣","4"],
-    "id":"w-4"
+    "location":"women",
+    "id":"005"
   },
                       
   {
@@ -55,8 +55,8 @@
     "img":"/image/w-shirt-2.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(180,140,116)","棕色"]],
-    "location":["women","上衣","5"],
-    "id":"w-5"
+    "location":"women",
+    "id":"006"
   },
       
   {
@@ -65,8 +65,8 @@
     "img":"/image/w-shirt-3.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(155,157,158)","灰色"]],
-    "location":["women","上衣","6"],
-    "id":"w-6"
+    "location":"women",
+    "id":"007"
   },
 
   {
@@ -75,8 +75,8 @@
     "img":"/image/w-pants-1.jpg",
     "size":["S","M","L"],
     "color":[["rgb(127,157,183)","Default"]],
-    "location":["women","下身","7"],
-    "id":"w-7"
+    "location":"women",
+    "id":"008"
   },
         
   {
@@ -85,8 +85,8 @@
     "img":"/image/w-pants-2.jpg",
     "size":["S","M","L"],
     "color":[["rgb(158,151,148)","灰色"]],
-    "location":["women","下身","8"],
-    "id":"w-8"
+    "location":"women",
+    "id":"009"
   },
 
   {
@@ -95,8 +95,8 @@
     "img":"/image/dress-1.jpg",
     "size":["S","M"],
     "color":[["rgb(10,12,13)","黑色"]],
-    "location":["women","洋裝","9"],
-    "id":"w-9"
+    "location":"women",
+    "id":"010"
   },
 
   {
@@ -105,8 +105,8 @@
     "img":"/image/dress-2.jpg",
     "size":["S","M"],
     "color":[["rgb(73,64,59)","Default"]],
-    "location":["women","洋裝","10"],
-    "id":"w-10"
+    "location":"women",
+    "id":"011"
   },
 
   {
@@ -115,8 +115,8 @@
     "img":"/image/w-hat-1.jpg",
     "size":["M"],
     "color":[["rgb(38,162,202)","Default"]],
-    "location":["women","配件","11"],
-    "id":"w-11"
+    "location":"women",
+    "id":"012"
   },
 
   {
@@ -125,8 +125,8 @@
     "img":"/image/m-shirt-4.jpg",
     "size":["M","L","XL"],
     "color":[["rgb(1,5,11)","黑色"]],
-    "location":["men","上衣","12"],
-    "id":"m-0"
+    "location":"men",
+    "id":"013"
   },
 
   {
@@ -135,8 +135,8 @@
     "img":"/image/m-coat-3.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(26,28,31)","黑色"]],
-    "location":["men","外套","13"],
-    "id":"m-1"
+    "location":"men",
+    "id":"014"
   },
 
   {
@@ -145,8 +145,8 @@
     "img":"/image/m-coat-4.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(185,194,200)","灰色"]],
-    "location":["men","外套","14"],
-    "id":"m-2"
+    "location":"men",
+    "id":"015"
   },
       
   {
@@ -155,8 +155,8 @@
     "img":"/image/m-coat-1.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(66,65,68)","灰色"]],
-    "location":["men","外套","15"],
-    "id":"m-3"
+    "location":"men",
+    "id":"016"
   },
 
   {
@@ -165,8 +165,8 @@
     "img":"/image/m-coat-2.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(23,38,66)","藍色"]],
-    "location":["men","外套","16"],
-    "id":"m-4"
+    "location":"men",
+    "id":"017"
   },
 
   {
@@ -175,8 +175,8 @@
     "img":"/image/m-sports-1.jpg",
     "size":["M","L","XL"],
     "color":[["rgb(15,15,15)","黑色"]],
-    "location":["men","運動","17"],
-    "id":"m-5"
+    "location":"men",
+    "id":"018"
   },
 
   {
@@ -185,8 +185,8 @@
     "img":"/image/m-sports-2.jpg",
     "size":["M","L","XL"],
     "color":[["rgb(68,75,106)","藍色"]],
-    "location":["men","運動","18"],
-    "id":"m-6"
+    "location":"men",
+    "id":"019"
   },
 
   {
@@ -195,8 +195,8 @@
     "img":"/image/m-shirt-1.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(230,230,230)","白色"]],
-    "location":["men","上衣","19"],
-    "id":"m-7"
+    "location":"men",
+    "id":"020"
   },
 
   {
@@ -205,8 +205,8 @@
     "img":"/image/m-pants-1.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(94,92,98)","灰色"]],
-    "location":["men","下身","20"],
-    "id":"m-8"
+    "location":"men",
+    "id":"021"
   },
 
   {
@@ -215,8 +215,8 @@
     "img":"/image/m-shirt-2.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(233,216,200)","卡其色"]],
-    "location":["men","上衣","21"],
-    "id":"m-9"
+    "location":"men",
+    "id":"022"
   },
 
   {
@@ -225,8 +225,8 @@
     "img":"/image/m-shirt-3.jpg",
     "size":["S","M","L","XL"],
     "color":[["rgb(31,44,55)","藍色"]],
-    "location":["men","上衣","22"],
-    "id":"m-10"
+    "location":"men",
+    "id":"023"
   },
 
   {
@@ -235,8 +235,8 @@
     "img":"/image/m-hat-1.jpg",
     "size":["M"],
     "color":[["rgb(223,224,216)","白色"]],
-    "location":["men","配件","23"],
-    "id":"m-11"
+    "location":"men",
+    "id":"024"
   },
 
   {
@@ -245,8 +245,8 @@
     "img":"/image/k-shirt-1.jpg",
     "size":["S","M","L"],
     "color":[["rgb(149,146,151)","灰色"]],
-    "location":["kids","上衣","24"],
-    "id":"k-0"
+    "location":"kids",
+    "id":"025"
   },
 
   {
@@ -255,8 +255,8 @@
     "img":"/image/k-shirt-2.jpg",
     "size":["S","M","L"],
     "color":[["rgb(231,231,233)","白色"]],
-    "location":["kids","上衣","25"],
-    "id":"k-1"
+    "location":"kids",
+    "id":"026"
   },
 
   {
@@ -265,8 +265,8 @@
     "img":"/image/k-pants-1.jpg",
     "size":["S","M","L"],
     "color":[["rgb(52,55,67)","Default"]],
-    "location":["kids","下身","26"],
-    "id":"k-2"
+    "location":"kids",
+    "id":"027"
   },
 
   {
@@ -275,8 +275,8 @@
     "img":"/image/k-coat-1.jpg",
     "size":["S","M","L"],
     "color":[["rgb(31,42,41)","Default"]],
-    "location":["kids","外套","27"],
-    "id":"k-3"
+    "location":"kids",
+    "id":"028"
   },
 
   {
@@ -285,7 +285,7 @@
     "img":"/image/k-dress-1.jpg",
     "size":["S","M","L"],
     "color":[["rgb(237,215,206)","粉色"]],
-    "location":["kids","洋裝","28"],
-    "id":"k-4"
+    "location":"kids",
+    "id":"029"
   }
 ]
