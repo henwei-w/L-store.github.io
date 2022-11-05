@@ -12,6 +12,8 @@ import Information from "./components/Information";
 import Pay from "./components/Pay";
 import Account from "./components/Account";
 import Register from "./components/Register";
+import ImageSource from "./components/ImageSource";
+import Backstage from "./components/Backstage";
 
 const data = require("./data.json");
 export const content = createContext(data);
@@ -58,6 +60,12 @@ function App() {
           <Route path="/account" element={<Account />} />
 
           <Route path="/register" element={<Register />} />
+
+          <Route path="/imgsource" element={<ImageSource />} />
+
+          <Route path="/backstage" element={<Backstage />}>
+            <Route path=":type" element={<Backstage />} />
+          </Route>
 
           <Route path="/women" element={<WomenPage />}>
             <Route path=":type" element={<WomenPage />}>

@@ -1,11 +1,11 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import * as HTTP from "services/api";
 
 const Background = styled.div`
   padding: 30px;
-`
+`;
 
 const Wrap = styled.div`
   max-width: 500px;
@@ -20,7 +20,7 @@ const Wrap = styled.div`
     position: relative;
     left: -25px;
   }
-`
+`;
 
 const LoginData = styled.div`
   text-align: end;
@@ -58,9 +58,9 @@ const LoginData = styled.div`
       border-bottom: 1.5px solid black;
     }
   }
-`
+`;
 
-const LoginBtn = styled.input`
+const LoginBtn = styled.button`
   position: absolute;
   top: 150px;
   right: 0px;
@@ -75,11 +75,11 @@ const LoginBtn = styled.input`
     background-color: rgb(76, 84, 89);
     border: 1.5px solid rgb(76, 84, 89);
   }
-`
+`;
 
 const Hr = styled.hr`
   margin-top: 160px;
-`
+`;
 
 const Register = styled.div`
   margin-top: 20px;
@@ -111,33 +111,69 @@ const Register = styled.div`
       border: 1.5px solid rgb(76, 84, 89);
     }
   }
-`
+`;
 
 const Block = styled.div`
   width: 100%;
   height: 100px;
-`
+`;
 
 function Account() {
-
-  const [eye, setEye] = useState("hide")
+  const [eye, setEye] = useState("hide");
   const [passwordState, setPasswordState] = useState("password");
 
   const setEyeState = () => {
     eye === "hide" ? setEye("show") : setEye("hide");
-    passwordState === "password" ? setPasswordState("text") : setPasswordState("password");
-  }
+    passwordState === "password"
+      ? setPasswordState("text")
+      : setPasswordState("password");
+  };
+
+  const getAccoountData = () => {
+    let username = document.getElementById("loginUsername").value;
+    let password = document.getElementById("loginPassword").value;
+
+    let checkArr = [username, password];
+    let formState = 0;
+
+    for (let i = 0; i < checkArr.length; i++) {
+      if (checkArr[i] === "") {
+        alert("請輸入帳號及密碼");
+        break;
+      }
+      formState += 1;
+    }
+
+    let value;
+    formState === 2
+      ? (value = { username: username, password: password })
+      : console.log("error");
+
+    formState === 2 ? HTTP.login(value) : console.log("error");
+  };
 
   return (
     <Background>
       <Wrap>
         登入
         <LoginData>
-          <label>帳號：<input type="text" name="username" /></label>
-          <label>密碼：<input type={passwordState} name="password" /></label>
-          <img src={process.env.PUBLIC_URL + `/icon/${eye}.png`} alt="..." onClick={() => setEyeState()} />
+          <label>
+            帳號：
+            <input type="text" name="username" id="loginUsername" />
+          </label>
+          <label>
+            密碼：
+            <input type={passwordState} name="password" id="loginPassword" />
+          </label>
+          <img
+            src={process.env.PUBLIC_URL + `/icon/${eye}.png`}
+            alt="..."
+            onClick={() => setEyeState()}
+          />
           <Link to="">忘記密碼/修改密碼</Link>
-          <LoginBtn type="submit" value="登入" />
+          <LoginBtn type="submit" onClick={() => getAccoountData()}>
+            登入
+          </LoginBtn>
         </LoginData>
         <Hr />
         <Register>
@@ -147,7 +183,7 @@ function Account() {
         </Register>
       </Wrap>
     </Background>
-  )
+  );
 }
 
 export default Account;

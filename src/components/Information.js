@@ -75,7 +75,7 @@ const Store = styled.div.attrs({ className: "store" })`
   margin-top: 15px;
 `;
 
-const Submit = styled.input`
+const Submit = styled.button`
   font-size: 1.6rem;
   text-decoration: none;
   color: black;
@@ -148,7 +148,7 @@ function Information() {
           </Transport>
 
           <Link to="/pay">
-            <Submit type="submit" value="選擇付款方式" />
+            <Submit type="submit">選擇付款方式</Submit>
           </Link>
           <Block />
         </Form>

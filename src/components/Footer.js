@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const CustomFooter = styled.div`
@@ -11,6 +12,9 @@ const CustomFooter = styled.div`
   align-items: center;
   position: relative;
   bottom: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 `;
 
 const Text = styled.div`
@@ -26,6 +30,16 @@ const CopyRight = styled.div`
   font-size: 0.8rem;
 `;
 
+const ImageSource = styled(Link)`
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    color: black;
+    border-bottom: 1.5px solid black;
+  }
+`
+
 function Footer() {
   return (
     <CustomFooter>
@@ -35,6 +49,8 @@ function Footer() {
           電話： 0912345678
           <br />
           e-mail: lstore@gmail.com
+          <br />
+          <ImageSource to="/imgsource">Image Source</ImageSource>
         </p>
       </Text>
       <CopyRight>copyright &copy; Linus Wu 2022.</CopyRight>
