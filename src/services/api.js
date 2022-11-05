@@ -1,12 +1,10 @@
 import HTTP from "services/index";
 
 export const login = (payload) =>
-  HTTP.post(
-    "/api/v1/login/",
-    {
-      username: payload.username,
-      password: payload.password,
-    })
+  HTTP.post("/api/v1/login/", {
+    username: payload.username,
+    password: payload.password,
+  })
     .then(function (response) {
       console.log(response);
     })
@@ -15,14 +13,11 @@ export const login = (payload) =>
     });
 
 export const register = (payload) =>
-  HTTP.post(
-    "/api/v1/register/",
-    JSON.stringify({
-      username: payload.username,
-      email: payload.email,
-      password: payload.password,
-    })
-  )
+  HTTP.post("/api/v1/register/", {
+    username: payload.username,
+    email: payload.email,
+    password: payload.password,
+  })
     .then(function (response) {
       console.log(response);
     })
