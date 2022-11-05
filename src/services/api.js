@@ -16,7 +16,7 @@ export const login = (payload) =>
 
 export const register = (payload) =>
   HTTP.post(
-    "/register/",
+    "/api/v1/register/",
     JSON.stringify({
       username: payload.username,
       email: payload.email,
