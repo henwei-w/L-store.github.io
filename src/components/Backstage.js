@@ -15,7 +15,7 @@ const Wrap = styled.div`
 `;
 
 const ListChange = styled.div`
-  width: 12vw;
+  width: 15vw;
   padding: 15px;
   display: flex;
   flex-direction: column;

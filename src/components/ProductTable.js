@@ -1,417 +1,283 @@
 import styled from "styled-components";
-import { Table } from "antd";
+import { useContext, useEffect, useState } from "react";
+import { content } from "App";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useForm } from "react-hook-form";
+import * as HTTP from "services/api";
 
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-`
+`;
 
 const CustomTable = styled(Table)`
   margin-top: 30px;
+  z-index: 20;
+
+  & td {
+    padding: 10px;
+    position: relative;
+
+    & label {
+      border: 1.5px solid black;
+      padding: 5px;
+    }
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  margin-right: 30%;
+
+  & span {
+    margin-bottom: 6px;
+  }
+
+  & p {
+    margin-right: 85%;
+    font-size: 1.1rem;
+  }
+`;
+
+const ImgSpan = styled.span`
+  margin-right: -39.5%;
+`;
+
+const CustomButton = styled(Button)`
+  width: 8rem;
+  margin-top: 20px;
+`;
+
+const CustomModalFooter = styled(Modal.Footer)`
+  margin-right: -43%;
 `;
 
 function ProductTable() {
-  const dataSource = [
-    {
-      id: "001",
-      key: "001",
-      name: "長版羊毛大衣",
-      price: "2490",
-      size: ["S", "M", "L"],
-      color: [["rgb(170,88,43)", "棕色"]],
-      location: "women",
-      description: "",
-      img: "/image/w-coat-1.jpg",
-    },
+  const data = useContext(content);
 
-    {
-      id: "002",
-      key: "002",
-      name: "長版羊毛大衣",
-      price: "2490",
-      size: ["S", "M", "L"],
-      color: [["rgb(95,97,87)", "墨綠色"]],
-      location: "women",
-      description: "",
-      img: "/image/w-coat-2.jpg",
-    },
-
-    {
-      id: "003",
-      key: "003",
-      name: "休閒西裝外套",
-      price: "1490",
-      size: ["S", "M", "L"],
-      color: [
-        ["rgb(170,157,161)", "米色"],
-        ["rgb(49,48,45)", "灰色"],
-      ],
-      location: "women",
-      description: "",
-      img: "/image/w-coat-3.jpg",
-    },
-
-    {
-      id: "004",
-      key: "004",
-      name: "造型運動長袖",
-      price: "890",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(192,214,164)", "淺綠色"]],
-      location: "women",
-      description: "",
-      img: "/image/w-sports-1.jpg",
-    },
-
-    {
-      id: "005",
-      key: "005",
-      name: "造型條紋短袖",
-      price: "590",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(233,213,163)", "Default"]],
-      location: "women",
-      description: "",
-      img: "/image/w-shirt-1.jpg",
-    },
-
-    {
-      id: "006",
-      key: "006",
-      name: "純棉長袖",
-      price: "590",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(180,140,116)", "棕色"]],
-      location: "women",
-      description: "",
-      img: "/image/w-shirt-2.jpg",
-    },
-
-    {
-      id: "007",
-      key: "007",
-      name: "短版透氣上衣",
-      price: "590",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(155,157,158)", "灰色"]],
-      location: "women",
-      description: "",
-      img: "/image/w-shirt-3.jpg",
-    },
-
-    {
-      id: "008",
-      key: "008",
-      name: "牛仔短裙",
-      price: "790",
-      size: ["S", "M", "L"],
-      color: [["rgb(127,157,183)", "Default"]],
-      location: "women",
-      description: "",
-      img: "/image/w-pants-1.jpg",
-    },
-
-    {
-      id: "009",
-      key: "009",
-      name: "休閒透氣長褲",
-      price: "790",
-      size: ["S", "M", "L"],
-      color: [["rgb(158,151,148)", "灰色"]],
-      location: "women",
-      description: "",
-      img: "/image/w-pants-2.jpg",
-    },
-
-    {
-      id: "010",
-      key: "010",
-      name: "質感連身洋裝",
-      price: "1290",
-      size: ["S", "M"],
-      color: [["rgb(10,12,13)", "黑色"]],
-      location: "women",
-      description: "",
-      img: "/image/dress-1.jpg",
-    },
-
-    {
-      id: "011",
-      key: "011",
-      name: "碎花連身洋裝",
-      price: "1290",
-      size: ["S", "M"],
-      color: [["rgb(73,64,59)", "Default"]],
-      location: "women",
-      description: "",
-      img: "/image/dress-2.jpg",
-    },
-
-    {
-      id: "012",
-      key: "012",
-      name: "復古丹寧帽",
-      price: "590",
-      size: ["M"],
-      color: [["rgb(38,162,202)", "Default"]],
-      location: "women",
-      description: "",
-      img: "/image/w-hat-1.jpg",
-    },
-
-    {
-      id: "013",
-      key: "013",
-      name: "純棉長袖",
-      price: "790",
-      size: ["M", "L", "XL"],
-      color: [["rgb(1,5,11)", "黑色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-shirt-4.jpg",
-    },
-
-    {
-      id: "014",
-      key: "014",
-      name: "質感西裝外套",
-      price: "1990",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(26,28,31)", "黑色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-coat-3.jpg",
-    },
-
-    {
-      id: "015",
-      key: "015",
-      name: "質感西裝外套",
-      price: "1990",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(185,194,200)", "灰色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-coat-4.jpg",
-    },
-
-    {
-      id: "016",
-      key: "016",
-      name: "西裝外套",
-      price: "1490",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(66,65,68)", "灰色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-coat-1.jpg",
-    },
-
-    {
-      id: "017",
-      key: "017",
-      name: "西裝外套",
-      price: "1490",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(23,38,66)", "藍色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-coat-2.jpg",
-    },
-
-    {
-      id: "018",
-      key: "018",
-      name: "運動套裝",
-      price: "890",
-      size: ["M", "L", "XL"],
-      color: [["rgb(15,15,15)", "黑色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-sports-1.jpg",
-    },
-
-    {
-      id: "019",
-      key: "019",
-      name: "造型運動套裝",
-      price: "890",
-      size: ["M", "L", "XL"],
-      color: [["rgb(68,75,106)", "藍色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-sports-2.jpg",
-    },
-
-    {
-      id: "020",
-      key: "020",
-      name: "涼感透氣短袖",
-      price: "590",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(230,230,230)", "白色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-shirt-1.jpg",
-    },
-
-    {
-      id: "021",
-      key: "021",
-      name: "彈性修身西裝褲",
-      price: "990",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(94,92,98)", "灰色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-pants-1.jpg",
-    },
-
-    {
-      id: "022",
-      key: "022",
-      name: "輕薄休閒襯衫",
-      price: "790",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(233,216,200)", "卡其色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-shirt-2.jpg",
-    },
-
-    {
-      id: "023",
-      key: "023",
-      name: "輕薄休閒襯衫",
-      price: "790",
-      size: ["S", "M", "L", "XL"],
-      color: [["rgb(31,44,55)", "藍色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-shirt-3.jpg",
-    },
-
-    {
-      id: "024",
-      key: "024",
-      name: "質感鴨舌帽",
-      price: "590",
-      size: ["M"],
-      color: [["rgb(223,224,216)", "白色"]],
-      location: "men",
-      description: "",
-      img: "/image/m-hat-1.jpg",
-    },
-
-    {
-      id: "025",
-      key: "025",
-      name: "質感襯衫",
-      price: "590",
-      size: ["S", "M", "L"],
-      color: [["rgb(149,146,151)", "灰色"]],
-      location: "kids",
-      description: "",
-      img: "/image/k-shirt-1.jpg",
-    },
-
-    {
-      id: "026",
-      key: "026",
-      name: "透氣短袖",
-      price: "390",
-      size: ["S", "M", "L"],
-      color: [["rgb(231,231,233)", "白色"]],
-      location: "kids",
-      description: "",
-      img: "/image/k-shirt-2.jpg",
-    },
-
-    {
-      id: "027",
-      key: "027",
-      name: "彈性透氣牛仔褲",
-      price: "590",
-      size: ["S", "M", "L"],
-      color: [["rgb(52,55,67)", "Default"]],
-      location: "kids",
-      description: "",
-      img: "/image/k-pants-1.jpg",
-    },
-
-    {
-      id: "028",
-      key: "028",
-      name: "質感單寧外套",
-      price: "790",
-      size: ["S", "M", "L"],
-      color: [["rgb(31,42,41)", "Default"]],
-      location: "kids",
-      description: "",
-      img: "/image/k-coat-1.jpg",
-    },
-
-    {
-      id: "029",
-      key: "029",
-      name: "造型洋裝",
-      price: "390",
-      size: ["S", "M", "L"],
-      color: [["rgb(237,215,206)", "粉色"]],
-      location: "kids",
-      description: "",
-      img: "/image/k-dress-1.jpg",
-    },
-  ];
+  // getProductList api
+  const [dataSource, setDataSource] = useState(data);
 
   const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "商品名稱",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "價格",
-      dataIndex: "price",
-      key: "price",
-    },
-    {
-      title: "尺寸",
-      dataIndex: "size",
-      key: "size",
-    },
-    {
-      title: "顏色",
-      dataIndex: "color",
-      key: "color",
-    },
-    {
-      title: "類別",
-      dataIndex: "location",
-      key: "location",
-    },
-    {
-      title: "描述",
-      dataIndex: "description",
-      key: "description",
-    },
-    {
-      title: "圖片",
-      dataIndex: "img",
-      key: "img",
-    },
+    "ID",
+    "名稱",
+    "價格",
+    "尺寸",
+    "顏色",
+    "類別",
+    "描述",
+    "圖片",
+    "編輯",
+    "刪除",
   ];
+
+  const [editIndex, setEditIndex] = useState(1);
+
+  const [show, setShow] = useState(false);
+
+  const [buttonState, setButtonState] = useState("");
+
+  var formData = new FormData();
+
+  const [formState, setFormState] = useState([]);
+
+  const { register, handleSubmit, watch, setValue } = useForm();
+  const onSubmit = (data) => console.log(data);
+
+  const setImg = (e) => {
+    let newState = [...formState];
+    const img = {
+      key: "img",
+      value: e.target.files[0],
+    };
+    newState.push(img);
+    setFormState(newState);
+  };
+
+  const startEdit = (index) => {
+    setButtonState("edit");
+    setEditIndex(index);
+    setShow(true);
+  };
+
+  const startAdd = () => {
+    setButtonState("add");
+    setEditIndex(dataSource.length);
+    setShow(true);
+  };
+
+  useEffect(() => {
+    if (buttonState === "edit") {
+      setValue("name", dataSource[editIndex].name);
+      setValue("price", dataSource[editIndex].price);
+      setValue("size", dataSource[editIndex].size);
+      setValue("color", JSON.stringify(dataSource[editIndex].color));
+      setValue("location", dataSource[editIndex].location);
+      setValue("description", dataSource[editIndex].description);
+    } else {
+      setValue("name", "");
+      setValue("price", "");
+      setValue("size", []);
+      setValue("color", []);
+      setValue("location", "");
+      setValue("description", "");
+    }
+  }, [editIndex, dataSource, buttonState, setValue]);
+
+  const storeData = () => {
+    const formValue = watch();
+    const valueArr = Object.values(formValue);
+    let valueState = 0;
+    for (let i = 0; i < valueArr.length; i++) {
+      if (valueArr[i] === "") {
+        alert("商品資料未填寫完整");
+        break;
+      }
+      valueState++;
+    }
+
+    const pushFormData = () => {
+      for (let i = 0; i < formState.length; i++) {
+        formData.append(formState[i].key, formState[i].value);
+      }
+
+      buttonState === "add"
+        ? HTTP.addProduct(formData)
+        : HTTP.editProduct(formData);
+    };
+
+    const setNewValue = () => {
+      if (formState[0].hasOwnProperty("img")) {
+        let newState = [...formState];
+        newState.push({ key: "name", value: formValue.name });
+        newState.push({ key: "price", value: formValue.price });
+        newState.push({ key: "size", value: formValue.size });
+        newState.push({ key: "color", value: JSON.parse(formValue.color) });
+        newState.push({ key: "location", value: formValue.location });
+        newState.push({ key: "description", value: formValue.description });
+        setFormState(newState);
+
+        pushFormData();
+      } else {
+        alert("選擇要上傳的圖片");
+      }
+    };
+
+    valueState === 7 ? setNewValue() : console.log("error");
+
+    setShow(false);
+  };
+
+  const deleteData = (index) => {
+    let newState = [...dataSource];
+    newState.splice(index, 1);
+    setDataSource(newState);
+
+    // deleteProduct api
+  };
 
   return (
     <Wrap>
       商品列表
-      <CustomTable dataSource={dataSource} columns={columns} />
+      <CustomButton variant="secondary" onClick={() => startAdd()}>
+        新增商品
+      </CustomButton>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>產品資料</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <span>
+              <p>ID : {editIndex + 1}</p>
+            </span>
+            <span>
+              名稱 : <input {...register("name", { required: true })} />
+            </span>
+            <span>
+              價格 : <input {...register("price", { required: true })} />
+            </span>
+            <span>
+              尺寸 : <input {...register("size", { required: true })} />
+            </span>
+            <span>
+              顏色 : <input {...register("color", { required: true })} />
+            </span>
+            <span>
+              類別 : <input {...register("location", { required: true })} />
+            </span>
+            <span>
+              描述 : <input {...register("description", { required: true })} />
+            </span>
+            <ImgSpan>
+              圖片 :{" "}
+              <input
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                {...register("img", { required: true })}
+                onChange={(e) => setImg(e)}
+              />
+            </ImgSpan>
+
+            <CustomModalFooter>
+              <Button
+                variant="outline-secondary"
+                onClick={() => setShow(false)}
+              >
+                取消
+              </Button>
+              <Button
+                variant="secondary"
+                type="submit"
+                onClick={() => storeData()}
+              >
+                {buttonState === "add" ? "新增" : "編輯"}
+              </Button>
+            </CustomModalFooter>
+          </Form>
+        </Modal.Body>
+      </Modal>
+      <CustomTable striped bordered hover backdrop="true">
+        <thead>
+          <tr>
+            {columns.map((value, index) => (
+              <td key={index}>{value}</td>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {dataSource.map((value, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{value.name}</td>
+              <td>{value.price}</td>
+              <td>{value.size}</td>
+              <td>{JSON.stringify(value.color)}</td>
+              <td>{value.location}</td>
+              <td>{value.description}</td>
+              <td></td>
+              <td>
+                <Button variant="secondary" onClick={() => startEdit(index)}>
+                  編輯
+                </Button>
+              </td>
+              <td>
+                <Button
+                  variant="outline-danger"
+                  onClick={() => deleteData(index)}
+                >
+                  刪除
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </CustomTable>
     </Wrap>
   );
 }

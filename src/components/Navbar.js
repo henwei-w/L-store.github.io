@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState, useContext } from "react";
-import { cart, set } from "../App";
 import styled from "styled-components";
+import Dropdown from "react-bootstrap/Dropdown";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { removeToken } from "../reducer/userStateSlice";
 
 const Header = styled.nav`
   display: flex;
@@ -190,13 +192,80 @@ const LogIn = styled.ul`
   }
 `;
 
+const CustomDropdownToggle = styled(Dropdown.Toggle)`
+  background: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  position: relative;
+  top: 0;
+
+  &:hover {
+    background: 0;
+  }
+
+  &:active {
+    color: 0;
+    background-color: 0;
+  }
+
+  &::after {
+    display: none;
+  }
+`;
+
+const CustomDropDownMenu = styled(Dropdown.Menu)`
+  border-radius: 3;
+  font-size: 1.2rem;
+  padding: 10px 10px;
+`;
+
+const CustomDropDownItem = styled(Dropdown.Item)`
+  border-bottom: 1px solid white;
+  margin: 5px auto;
+
+  &:hover {
+    background-color: white;
+    border-bottom: 1px solid black;
+  }
+
+  &:active {
+    background-color: white;
+  }
+`;
+
 function Navbar() {
-  const cartData = useContext(cart);
-  const setAmount = useContext(set);
+  const cartAmount = useSelector((state) => state.cartData.value.amount);
 
-  const [cartAmount, setCartAmount] = useState(cartData.length);
+  const user = useSelector((state) => state.userState.value.data);
+  const username = useSelector((state) => state.userState.value.username);
+  const dispatch = useDispatch();
 
-  setAmount(setCartAmount);
+  const [icon, setIcon] = useState("");
+  const [path, setPath] = useState("");
+  const [item, setItem] = useState("");
+  const [name, setName] = useState("");
+  const [logoutItem, setLogoutItem] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setIcon("user-logout");
+      setPath("#/backstage/product");
+      setItem("後台管理系統");
+      setName(<CustomDropDownItem>{username}</CustomDropDownItem>);
+      setLogoutItem(
+        <CustomDropDownItem onClick={() => dispatch(removeToken())}>
+          登出
+        </CustomDropDownItem>
+      );
+    } else {
+      setIcon("user");
+      setPath("#/account");
+      setItem("登入");
+      setName("");
+      setLogoutItem("");
+    }
+  }, [user, username, dispatch]);
 
   return (
     <Header>
@@ -252,9 +321,20 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/account">
-            <img src={process.env.PUBLIC_URL + "/icon/user.png"} alt="..." />
-          </Link>
+          <Dropdown>
+            <CustomDropdownToggle variant="link" id="dropdown-basic">
+              <img
+                src={process.env.PUBLIC_URL + `/icon/${icon}.png`}
+                alt="..."
+              />
+            </CustomDropdownToggle>
+
+            <CustomDropDownMenu>
+              {name}
+              <CustomDropDownItem href={path}>{item}</CustomDropDownItem>
+              {logoutItem}
+            </CustomDropDownMenu>
+          </Dropdown>
         </li>
       </LogIn>
     </Header>

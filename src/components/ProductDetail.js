@@ -1,8 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useContext, useState } from "react";
-import { content, getCart } from "../App";
+import { content } from "../App";
 import ProductMenu from "./ProductMenu";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addOrder } from '../reducer/cartDataSlice';
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -168,6 +170,8 @@ const Button = styled.ul`
 `;
 
 function ProductDetail() {
+  const dispatch = useDispatch();
+
   const data = useContext(content);
 
   const params = useParams();
@@ -175,7 +179,7 @@ function ProductDetail() {
 
   let detailContent;
   if (id) {
-    detailContent = data[id.slice(1, 3) - 1];
+    detailContent = data[id - 1];
   }
 
   let menuTitle;
@@ -216,18 +220,10 @@ function ProductDetail() {
 
   const orderState = orderColor && orderSize && "ready";
 
-  const setCartData = useContext(getCart);
-
-  let localCart = JSON.parse(localStorage.getItem("cart"))
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
-
   const [orderValue, setOrderValue] = useState(false);
 
   function setCart() {
-    localCart.push(order);
-    setCartData(localCart, localCart.length);
-    localStorage.setItem("cart", JSON.stringify(localCart));
+    dispatch(addOrder(order));
     setOrderValue(true);
   }
 
@@ -237,7 +233,7 @@ function ProductDetail() {
 
   function set(e) {
     orderState
-      ? setCart() || alert("成功加入購物車")
+      ? setCart() || alert("成功加入購物車")  //類似行為裝成function
       : alert("請選擇顏色及尺寸") || cancel(e);
   }
 
@@ -268,10 +264,10 @@ function ProductDetail() {
                         id={`color${index}`}
                       />
                       <Color
-                        onClick={() => setOrderColor(data[1])}
+                        onClick={() => setOrderColor(data.colorName)}
                         key={`ckey${index}`}
                         htmlFor={`color${index}`}
-                        style={{ backgroundColor: data[0] }}
+                        style={{ backgroundColor: data.rgb }}
                       />
                     </div>
                   ))}

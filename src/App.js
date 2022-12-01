@@ -14,31 +14,10 @@ import Account from "./components/Account";
 import Register from "./components/Register";
 import ImageSource from "./components/ImageSource";
 import Backstage from "./components/Backstage";
+import NotFound from "components/NotFound";
 
 const data = require("./data.json");
 export const content = createContext(data);
-
-let cartData = JSON.parse(localStorage.getItem("cart")) || [];
-
-let setCartAmount;
-
-const setCart = (orderData, orderAmount) => {
-  cartData = orderData;
-  setCartAmount(orderAmount);
-};
-
-const setChangeAmount = (data) => {
-  setCartAmount(data);
-};
-
-const setAmount = (set) => {
-  setCartAmount = set;
-};
-
-export const getCart = createContext(setCart);
-export const set = createContext(setAmount);
-export const changeAmount = createContext(setChangeAmount);
-export const cart = createContext(cartData);
 
 function App() {
   return (
@@ -90,6 +69,8 @@ function App() {
               <Route path=":id" element={<ProductDetail />} />
             </Route>
           </Route>
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
 

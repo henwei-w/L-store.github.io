@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { cart, changeAmount } from "../App";
 import styled, { css } from "styled-components";
 import Dropdown from "react-bootstrap/Dropdown";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteOrder,
+  incrementOrderTotal,
+  decrementOrderTotal,
+  sort,
+} from "../reducer/cartDataSlice";
 
 const Background = styled.div`
   padding: 0px 20px;
@@ -205,30 +210,18 @@ const Ul = styled.ul`
 `;
 
 function ShoppingCart() {
-  const orderData = useContext(cart);
-  const setAmount = useContext(changeAmount);
+  const dispatch = useDispatch();
 
-  const [cartDataList, setCartDataList] = useState(orderData);
-
-  useEffect(() => {
-    setCartDataList(JSON.parse(localStorage.getItem("cart")));
-  }, []);
+  const cartDataList = useSelector((state) => state.cartData.value.data);
 
   const setTotal = (index, value) => {
-    let newState = [...cartDataList];
-    newState[index].total = value
-      ? cartDataList[index].total + 1
-      : cartDataList[index].total - 1;
-    setCartDataList(newState);
-    localStorage.setItem("cart", JSON.stringify(cartDataList));
+    value
+      ? dispatch(incrementOrderTotal(index))
+      : dispatch(decrementOrderTotal(index));
   };
 
-  const deleteOrder = (index) => {
-    let newState = [...cartDataList];
-    newState.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(newState));
-    setAmount(newState.length);
-    setCartDataList(newState);
+  const deleteFunc = (index) => {
+    dispatch(deleteOrder(index));
   };
 
   const finalTotal = () => {
@@ -243,12 +236,7 @@ function ShoppingCart() {
   };
 
   const reSort = (value) => {
-    let newState = [...cartDataList];
-    setCartDataList(
-      value
-        ? newState.sort((a, b) => a.price * a.total - b.price * b.total)
-        : newState.sort((a, b) => b.price * b.total - a.price * a.total)
-    );
+    dispatch(sort(value))
   };
 
   return (
@@ -297,7 +285,7 @@ function ShoppingCart() {
                       onClick={() =>
                         data.total > 1
                           ? setTotal(index, false)
-                          : deleteOrder(index)
+                          : deleteFunc(index)
                       }
                     >
                       -
@@ -308,7 +296,7 @@ function ShoppingCart() {
                   </Total>
                 </Text>
 
-                <Delete onClick={() => deleteOrder(index)}>刪除</Delete>
+                <Delete onClick={() => deleteFunc(index)}>刪除</Delete>
               </List>
             ))}
           </Ul>

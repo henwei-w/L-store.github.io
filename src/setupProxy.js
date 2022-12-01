@@ -1,4 +1,4 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const proxy = {
   target: process.env.REACT_APP_URL,
   changeOrigin: true,
