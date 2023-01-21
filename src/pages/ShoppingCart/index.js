@@ -7,7 +7,7 @@ import {
   incrementOrderTotal,
   decrementOrderTotal,
   sort,
-} from "../reducer/cartDataSlice";
+} from "../../reducer/cartDataSlice";
 
 const Background = styled.div`
   padding: 0px 20px;
@@ -231,7 +231,7 @@ function ShoppingCart() {
   };
 
   const setLocation = (data) => {
-    let location = `${data.location}/${data.id}`;
+    let location = `${data.location.gender}/${1}`; // 資料id
     return location;
   };
 

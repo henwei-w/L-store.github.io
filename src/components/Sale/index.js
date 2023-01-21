@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import Product from "./Product";
-import { content } from "../App.js";
+import React from "react";
 import styled from "styled-components";
+import { saleData } from "./saleData";
 
 const Container = styled.div`
   padding: 25px;
 `;
 
 const Title = styled.div`
-  font-size: 1.2rem;
-  margin: 20px 0px;
+  font-size: 1.3rem;
+  margin-top: 20px;
+  margin-bottom: 40px;
   text-align: center;
 `;
 
@@ -43,57 +43,28 @@ const Text = styled.div`
   background-color: rgb(236, 129, 68);
 `;
 
-function Content() {
-  const data = useContext(content);
+function Sale() {
 
   return (
     <Container>
-      <Title>開幕滿額禮</Title>
+      <Title>{saleData.title}</Title>
       <Background>
         <Item>
           <img
-            src={process.env.PUBLIC_URL + "/image/event-img.jpg"}
+            src={process.env.PUBLIC_URL + `${saleData.image}`}
             alt="..."
           />
           <Text>
             <p>
-              全館滿2000元
+              {saleData.description[0]}
               <br />
-              即送造型帆布托特包
+              {saleData.description[1]}
             </p>
           </Text>
         </Item>
       </Background>
-
-      <Product
-        title={"新品上市"}
-        data={[
-          data[0],
-          data[1],
-          data[2],
-          data[10],
-          data[13],
-          data[14],
-          data[15],
-          data[16],
-        ]}
-      />
-
-      <Product
-        title={"熱銷商品"}
-        data={[
-          data[4],
-          data[5],
-          data[6],
-          data[7],
-          data[12],
-          data[17],
-          data[18],
-          data[19],
-        ]}
-      />
     </Container>
   );
 }
 
-export default Content;
+export default Sale;

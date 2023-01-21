@@ -38,22 +38,20 @@ const ItemText = styled.div`
   }
 `;
 
-function Item(props) {
-  const imgSrc = props.imgSrc;
+function Card(props) {
   const productData = props.data;
-  const path = props.path;
 
   return (
     <CustomCol>
-      <Link to={`/Product_detail/${path[0]}/${path[1]}`}>
+      <Link to={`/Product_detail/${productData.location.gender}/1`}>
         <ImgBackground>
-          <img src={process.env.PUBLIC_URL + imgSrc} alt="..." />
+          <img src={process.env.PUBLIC_URL + productData.img} alt="..." />
 
           <ItemText>
             <p>
-              {productData[0]}
+              {productData.name}
               <br />
-              <span>NT$ {productData[1]}</span>
+              <span>NT$ {productData.price}</span>
             </p>
           </ItemText>
         </ImgBackground>
@@ -62,4 +60,4 @@ function Item(props) {
   );
 }
 
-export default Item;
+export default Card;

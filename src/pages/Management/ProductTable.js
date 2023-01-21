@@ -117,7 +117,7 @@ function ProductTable() {
       setValue("price", dataSource[editIndex].price);
       setValue("size", dataSource[editIndex].size);
       setValue("color", JSON.stringify(dataSource[editIndex].color));
-      setValue("location", dataSource[editIndex].location);
+      setValue("location", JSON.stringify(dataSource[editIndex].location));
       setValue("description", dataSource[editIndex].description);
     } else {
       setValue("name", "");
@@ -158,7 +158,7 @@ function ProductTable() {
         newState.push({ key: "price", value: formValue.price });
         newState.push({ key: "size", value: formValue.size });
         newState.push({ key: "color", value: JSON.parse(formValue.color) });
-        newState.push({ key: "location", value: formValue.location });
+        newState.push({ key: "location", value: JSON.parse(formValue.location) });
         newState.push({ key: "description", value: formValue.description });
         setFormState(newState);
 
@@ -258,7 +258,7 @@ function ProductTable() {
               <td>{value.price}</td>
               <td>{value.size}</td>
               <td>{JSON.stringify(value.color)}</td>
-              <td>{value.location}</td>
+              <td>{JSON.stringify(value.location)}</td>
               <td>{value.description}</td>
               <td></td>
               <td>

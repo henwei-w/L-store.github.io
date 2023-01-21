@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Dropdown from "react-bootstrap/Dropdown";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { removeToken } from "../reducer/userStateSlice";
+import { removeToken } from "../../reducer/userStateSlice";
 
-const Header = styled.nav`
+const CustomHeader = styled.nav`
   display: flex;
   background: linear-gradient(to top, rgb(236, 236, 236), white);
   width: 100vw;
@@ -234,7 +236,13 @@ const CustomDropDownItem = styled(Dropdown.Item)`
   }
 `;
 
-function Navbar() {
+const CustomModalBody = styled(Modal.Body)`
+  padding: 50px;
+  font-size: 1.3rem;
+  text-align: center;
+`
+
+function Header() {
   const cartAmount = useSelector((state) => state.cartData.value.amount);
 
   const user = useSelector((state) => state.userState.value.data);
@@ -247,6 +255,11 @@ function Navbar() {
   const [name, setName] = useState("");
   const [logoutItem, setLogoutItem] = useState("");
 
+  const logout = () => {
+    handleClose();
+    dispatch(removeToken());
+  }
+
   useEffect(() => {
     if (user) {
       setIcon("user-logout");
@@ -254,21 +267,26 @@ function Navbar() {
       setItem("後台管理系統");
       setName(<CustomDropDownItem>{username}</CustomDropDownItem>);
       setLogoutItem(
-        <CustomDropDownItem onClick={() => dispatch(removeToken())}>
+        <CustomDropDownItem onClick={handleShow}>
           登出
         </CustomDropDownItem>
       );
     } else {
       setIcon("user");
-      setPath("#/account");
+      setPath("#/login");
       setItem("登入");
       setName("");
       setLogoutItem("");
     }
   }, [user, username, dispatch]);
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <Header>
+    <CustomHeader>
       <Logo to="/">
         <img src={process.env.PUBLIC_URL + "/icon/logo.png"} alt="..." />
       </Logo>
@@ -337,8 +355,21 @@ function Navbar() {
           </Dropdown>
         </li>
       </LogIn>
-    </Header>
+
+      <Modal show={show} onHide={handleClose} centered>
+        <CustomModalBody>確定要登出嗎？</CustomModalBody>
+        <Modal.Footer>
+          <Button variant="outline-secondary" onClick={handleClose}>
+            取消
+          </Button>
+          <Button variant="danger" onClick={() => logout()}>
+            確定
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+    </CustomHeader>
   );
 }
 
-export default Navbar;
+export default Header;

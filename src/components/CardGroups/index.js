@@ -1,11 +1,11 @@
-import Item from "./Item";
+import Card from "./Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 
-const ProductTitle = styled.div`
-  font-size: 1.2rem;
-  margin: 50px 0px 30px 0px;
+const Title = styled.div`
+  font-size: 1.3rem;
+  margin: 60px 0px 30px 0px;
   text-align: center;
 `;
 
@@ -21,26 +21,21 @@ const CustomRow = styled(Row)`
   }
 `;
 
-function Product(props) {
+function CardGroups(props) {
   const title = props.title;
   const productData = props.data;
 
   return (
     <Container>
-      <ProductTitle>{title}</ProductTitle>
+      <Title>{title}</Title>
 
       <CustomRow xs={2} md={3} xl={4}>
-        {productData.map((data) => (
-          <Item
-            key={data.id}
-            path={[data.location, data.id]}
-            imgSrc={data.img}
-            data={[data.name, data.price]}
-          />
+        {productData.map((data, index) => (
+          <Card key={index} data={data} />
         ))}
       </CustomRow>
     </Container>
   );
 }
 
-export default Product;
+export default CardGroups;

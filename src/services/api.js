@@ -1,8 +1,4 @@
 import HTTP from "services/index";
-import { useDispatch } from "react-redux";
-import { setToken } from "../reducer/userStateSlice";
-
-const dispatch = useDispatch;
 
 export const login = (payload) =>
   HTTP.post("/api/v1/login/", {
@@ -11,15 +7,14 @@ export const login = (payload) =>
   })
     .then(function (response) {
       if (response.data.token) {
-        dispatch(
-          setToken({ token: response.data.token, username: payload.username })
-        );
+        sessionStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("username", payload.username);
         window.location.href = "/#/backstage/product";
-        alert("登入成功！");
+        window.location.reload();
       }
     })
     .catch(function (error) {
-      alert("帳號或密碼錯誤！");
+      payload.error();
     });
 
 export const register = (payload) =>
@@ -30,15 +25,14 @@ export const register = (payload) =>
   })
     .then(function (response) {
       if (response.data.token) {
-        dispatch(
-          setToken({ token: response.data.token, username: payload.username })
-        );
+        sessionStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("username", payload.username);
         window.location.href = "/#/backstage/product";
-        alert("註冊成功！");
+        window.location.reload();
       }
     })
     .catch(function (error) {
-      console.log(error);
+      payload.error();
     });
 
 export const getProductList = () =>

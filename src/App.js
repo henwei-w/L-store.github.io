@@ -1,20 +1,20 @@
 import { createContext } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import ShoppingCart from "./components/ShoppingCart";
-import WomenPage from "./components/WomenPage";
-import MenPage from "./components/MenPage";
-import KidsPage from "./components/KidsPage";
-import ProductDetail from "./components/ProductDetail";
-import Footer from "./components/Footer";
-import Information from "./components/Information";
-import Pay from "./components/Pay";
-import Account from "./components/Account";
-import Register from "./components/Register";
-import ImageSource from "./components/ImageSource";
-import Backstage from "./components/Backstage";
-import NotFound from "components/NotFound";
+import Header from "components/Layout/Header";
+import Home from "./pages/Home";
+import ShoppingCart from "./pages/ShoppingCart";
+import WomenPage from "./pages/ProductPage/WomenPage";
+import MenPage from "./pages/ProductPage/MenPage";
+import KidsPage from "./pages/ProductPage/KidsPage";
+import ProductDetail from "./pages/ProductDetail";
+import Footer from "components/Layout/Footer";
+import Information from "./pages/Checkout/Information";
+import Pay from "./pages/Checkout/Pay";
+import Login from "pages/Login";
+import Register from "./pages/Register";
+import ImageSource from "./assets/ImageSource";
+import Backstage from "./pages/Management/Backstage";
+import NotFound from "pages/NotFound";
 
 const data = require("./data.json");
 export const content = createContext(data);
@@ -22,7 +22,7 @@ export const content = createContext(data);
 function App() {
   return (
     <HashRouter>
-      <Navbar />
+      <Header />
 
       <div
         style={{ minHeight: "calc(100vh - 66px - 10rem)", marginTop: "66px" }}
@@ -36,7 +36,7 @@ function App() {
 
           <Route path="/pay" element={<Pay />} />
 
-          <Route path="/account" element={<Account />} />
+          <Route path="/login" element={<Login />} />
 
           <Route path="/register" element={<Register />} />
 

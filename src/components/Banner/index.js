@@ -4,6 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 const CustomCarousel = styled(Carousel)`
   margin-top: 66px;
+  margin-bottom: 25px;
 `;
 
 const CustomItem = styled(Carousel.Item)`

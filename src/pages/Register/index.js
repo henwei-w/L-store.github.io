@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import styled from "styled-components";
 import * as HTTP from "services/api";
 
@@ -66,9 +69,22 @@ const Block = styled.div`
   height: 100px;
 `;
 
+const CustomModalBody = styled(Modal.Body)`
+  padding: 50px;
+  text-align: center;
+  font-size: 1.8rem;
+`;
+
 function Register() {
   const [eye, setEye] = useState("hide");
   const [passwordState, setPasswordState] = useState("password");
+
+  const [warning, setWarning] = useState("");
+
+  const [showLoading, setShowLoading] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  const handleLoadingClose = () => setShowLoading(false);
+  const handleWarningClose = () => setShowWarning(false);
 
   const setEyeState = () => {
     eye === "hide" ? setEye("show") : setEye("hide");
@@ -78,6 +94,8 @@ function Register() {
   };
 
   const getFormValue = () => {
+    setShowLoading(true);
+
     let email = document.getElementById("email").value;
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
@@ -88,7 +106,9 @@ function Register() {
 
     for (let i = 0; i < checkArr.length; i++) {
       if (checkArr[i] === "") {
-        alert("尚有未填寫的資料");
+        setWarning("尚有未填寫的資料");
+        setShowLoading(false);
+        setShowWarning(true);
         break;
       }
       formState += 1;
@@ -99,14 +119,27 @@ function Register() {
         ? true
         : (() => {
             formState = 0;
-            alert("確認的密碼不一致");
+            setWarning("確認的密碼不一致");
+            setShowLoading(false);
+            setShowWarning(true);
           })();
 
     formState === 4 ? doubleCheck() : (formState = 0);
 
+    let error = () => {
+      setWarning("註冊資料錯誤");
+      setShowLoading(false);
+      setShowWarning(true);
+    };
+
     let value;
     formState === 4
-      ? (value = { username: username, email: email, password: password })
+      ? (value = {
+          username: username,
+          email: email,
+          password: password,
+          error: error,
+        })
       : console.log("error");
 
     formState === 4 ? HTTP.register(value) : console.log("error");
@@ -144,6 +177,52 @@ function Register() {
           <Block />
         </RegisterData>
       </Wrap>
+
+      <Modal
+        show={showLoading}
+        onHide={handleLoadingClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <CustomModalBody>
+          Loading
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginLeft: "10px", marginRight: "6px" }}
+          />
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginRight: "6px" }}
+          />
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginRight: "6px" }}
+          />
+        </CustomModalBody>
+        <Modal.Footer>
+          <Button
+            variant="outline-secondary"
+            onClick={() => setShowLoading(false)}
+          >
+            取消
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showWarning} onHide={handleWarningClose} centered>
+        <CustomModalBody>{warning}</CustomModalBody>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowWarning(false)}>
+            確定
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Background>
   );
 }

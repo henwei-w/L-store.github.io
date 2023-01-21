@@ -5,23 +5,20 @@ export const userStateSlice = createSlice({
   initialState: {
     value: {
       data: sessionStorage.getItem("token"),
-      username: "",
+      username: sessionStorage.getItem("username"),
     },
   },
   reducers: {
-    setToken: (state, action) => {
-      sessionStorage.setItem("token", action.payload.token);
-      state.value.data = sessionStorage.getItem("token");
-      state.value.username = action.payload.username;
-    },
     removeToken: (state) => {
       sessionStorage.removeItem("token");
+      sessionStorage.removeItem("username");
       state.value.data = sessionStorage.getItem("token");
-      state.value.username = "";
+      state.value.username = sessionStorage.getItem("username");
+      window.location.href = "/#/";
     },
   },
 });
 
-export const { setToken, removeToken } = userStateSlice.actions;
+export const { removeToken } = userStateSlice.actions;
 
 export default userStateSlice.reducer;

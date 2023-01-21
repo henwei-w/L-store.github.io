@@ -1,10 +1,12 @@
-import { Link, useParams } from "react-router-dom";
-import { useContext, useState } from "react";
-import { content } from "../App";
-import ProductMenu from "./ProductMenu";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import ProductMenu from "../../components/TypeMenu";
 import styled from "styled-components";
+import { addOrder } from "../../reducer/cartDataSlice";
 import { useDispatch } from "react-redux";
-import { addOrder } from '../reducer/cartDataSlice';
+import { useContext } from "react";
+import { content } from "../../App";
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -171,28 +173,26 @@ const Button = styled.ul`
 
 function ProductDetail() {
   const dispatch = useDispatch();
-
-  const data = useContext(content);
+  const productData = useContext(content); // get api 取出與womenpage 相同 index 的資料
 
   const params = useParams();
-  const id = params.id;
 
-  let detailContent;
-  if (id) {
-    detailContent = data[id - 1];
+  let data;
+  if(params.id){
+    data = productData[params.id];
   }
 
   let menuTitle;
-  switch (detailContent.location) {
-    case (detailContent.location = "women"):
+  switch (data.location.gender) {
+    case "women":
       menuTitle = ["上衣", "下身", "洋裝", "外套", "配件"];
       break;
 
-    case (detailContent.location = "men"):
+    case "men":
       menuTitle = ["上衣", "下身", "外套", "運動服裝", "配件"];
       break;
 
-    case (detailContent.location = "kids"):
+    case "kids":
       menuTitle = ["上衣", "下身", "外套", "洋裝"];
       break;
 
@@ -200,19 +200,19 @@ function ProductDetail() {
       break;
   }
 
-  let color = detailContent.color;
-  let size = detailContent.size;
+  let color = data.color;
+  let size = data.size;
 
   const [orderColor, setOrderColor] = useState("");
   const [orderSize, setOrderSize] = useState("");
   const [total, setTotal] = useState(1);
 
   let order = {
-    id: detailContent.id,
-    location: detailContent.location,
-    name: detailContent.name,
-    img: detailContent.img,
-    price: detailContent.price,
+    id: data.id,
+    location: data.location,
+    name: data.name,
+    img: data.img,
+    price: data.price,
     color: orderColor,
     size: orderSize,
     total: total,
@@ -233,24 +233,24 @@ function ProductDetail() {
 
   function set(e) {
     orderState
-      ? setCart() || alert("成功加入購物車")  //類似行為裝成function
+      ? setCart() || alert("成功加入購物車") //類似行為裝成function
       : alert("請選擇顏色及尺寸") || cancel(e);
   }
 
   return (
     <>
-      <ProductMenu path={detailContent.location} menu={menuTitle} />
+      <ProductMenu path={data.location.gender} menu={menuTitle} />
 
       <DetailContainer>
         <DetailWrap>
           <ImgBackground>
-            <img src={process.env.PUBLIC_URL + detailContent.img} alt="..." />
+            <img src={process.env.PUBLIC_URL + data.img} alt="..." />
           </ImgBackground>
 
           <Wrap>
             <Text>
-              <h1>{detailContent.name}</h1>
-              <h2>{`NT$ ${detailContent.price}`}</h2>
+              <h1>{data.name}</h1>
+              <h2>{`NT$ ${data.price}`}</h2>
 
               <form>
                 <Option>

@@ -1,9 +1,9 @@
 
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import ProductMenu from "./ProductMenu";
-import Product from "./Product";
-import { content } from "../App.js"
+import ProductMenu from "../../components/TypeMenu";
+import Product from "../../components/CardGroups";
+import { content } from "../../App.js"
 
 
 
@@ -14,27 +14,39 @@ function MenPage() {
 
   const params = useParams()
 
+  const getType = (type) => {
+    const typeArr = [];
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].location.gender === "men") {
+        if (data[i].location.type === type) {
+          typeArr.push(data[i]);
+        }
+      }
+    }
+    return typeArr;
+  };
+
   let menuData;
 
   switch(params.type){
     case params.type = "上衣":
-      menuData = [data[12],data[19],data[21],data[22]]
+      menuData = getType("上衣");
       break;
 
     case params.type = "下身":
-      menuData = [data[20]]
+      menuData = getType("下身");
       break;
 
     case params.type = "外套":
-      menuData = [data[13],data[14],data[15],data[16]]
+      menuData = getType("外套");
       break;
 
     case params.type = "運動服裝":
-      menuData = [data[17],data[18]]
+      menuData = getType("運動服裝");
       break;
 
     case params.type = "配件":
-      menuData = [data[23]]
+      menuData = getType("配件");
       break;
 
     default:

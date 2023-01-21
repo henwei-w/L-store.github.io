@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import * as HTTP from "services/api";
@@ -118,9 +121,17 @@ const Block = styled.div`
   height: 100px;
 `;
 
-function Account() {
+const CustomModalBody = styled(Modal.Body)`
+  padding: 50px;
+  text-align: center;
+  font-size: 1.8rem;
+`;
+
+function Login() {
   const [eye, setEye] = useState("hide");
   const [passwordState, setPasswordState] = useState("password");
+
+  const [warning, setWarning] = useState("");
 
   const setEyeState = () => {
     eye === "hide" ? setEye("show") : setEye("hide");
@@ -130,6 +141,8 @@ function Account() {
   };
 
   const getAccoountData = () => {
+    setShowLoading(true);
+
     let username = document.getElementById("loginUsername").value;
     let password = document.getElementById("loginPassword").value;
 
@@ -138,19 +151,32 @@ function Account() {
 
     for (let i = 0; i < checkArr.length; i++) {
       if (checkArr[i] === "") {
-        alert("請輸入帳號及密碼");
+        setWarning("請輸入帳號及密碼");
+        setShowLoading(false);
+        setShowWarning(true);
         break;
       }
       formState += 1;
     }
 
+    let error = () => {
+      setWarning("帳號或密碼錯誤");
+      setShowLoading(false);
+      setShowWarning(true);
+    };
+
     let value;
     formState === 2
-      ? (value = { username: username, password: password })
+      ? (value = { username: username, password: password, error: error })
       : console.log("error");
 
     formState === 2 ? HTTP.login(value) : console.log("error");
   };
+
+  const [showLoading, setShowLoading] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  const handleLoadingClose = () => setShowLoading(false);
+  const handleWarningClose = () => setShowWarning(false);
 
   return (
     <Background>
@@ -182,8 +208,54 @@ function Account() {
           <Block />
         </Register>
       </Wrap>
+
+      <Modal
+        show={showLoading}
+        onHide={handleLoadingClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <CustomModalBody>
+          Loading
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginLeft: "10px", marginRight: "6px" }}
+          />
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginRight: "6px" }}
+          />
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginRight: "6px" }}
+          />
+        </CustomModalBody>
+        <Modal.Footer>
+          <Button
+            variant="outline-secondary"
+            onClick={() => setShowLoading(false)}
+          >
+            取消
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showWarning} onHide={handleWarningClose} centered>
+        <CustomModalBody>{warning}</CustomModalBody>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowWarning(false)}>
+            確定
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Background>
   );
 }
 
-export default Account;
+export default Login;

@@ -42,7 +42,7 @@ const Block = styled.div`
   height: 80px;
 `;
 
-function ProductMenu(props) {
+function TypeMenu(props) {
   const menuTitle = props.menu;
   const path = props.path;
   const params = useParams();
@@ -64,4 +64,4 @@ function ProductMenu(props) {
   );
 }
 
-export default ProductMenu;
+export default TypeMenu;

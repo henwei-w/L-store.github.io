@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import store from "./app/store";
+import store from "./store";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./reset.css";
-import "./rwdControl.css";
+import "./style/reset.css";
+import "./style/rwdControl.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

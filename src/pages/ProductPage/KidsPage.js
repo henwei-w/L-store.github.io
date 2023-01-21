@@ -1,9 +1,9 @@
 
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import ProductMenu from "./ProductMenu";
-import Product from "./Product";
-import { content } from "../App.js"
+import ProductMenu from "../../components/TypeMenu";
+import Product from "../../components/CardGroups";
+import { content } from "../../App.js"
 
 
 
@@ -14,23 +14,35 @@ function KidsPage() {
 
   const params = useParams()
 
+  const getType = (type) => {
+    const typeArr = [];
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].location.gender === "kids") {
+        if (data[i].location.type === type) {
+          typeArr.push(data[i]);
+        }
+      }
+    }
+    return typeArr;
+  };
+
   let menuData;
 
   switch(params.type){
     case params.type = "上衣":
-      menuData = [data[24],data[25]]
+      menuData = getType("上衣");
       break;
 
     case params.type = "下身":
-      menuData = [data[26]]
+      menuData = getType("下身");
       break;
 
     case params.type = "外套":
-      menuData = [data[27]]
+      menuData = getType("外套");
       break;
 
     case params.type = "洋裝":
-      menuData = [data[28]]
+      menuData = getType("洋裝");
       break;
 
     default:
