@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/L-store/static/css/main.ccd08725.css",
+    "main.js": "/L-store/static/js/main.5911a538.js",
+    "index.html": "/L-store/index.html",
+    "main.ccd08725.css.map": "/L-store/static/css/main.ccd08725.css.map",
+    "main.5911a538.js.map": "/L-store/static/js/main.5911a538.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ccd08725.css",
+    "static/js/main.5911a538.js"
+  ]
+}
