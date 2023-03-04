@@ -3,16 +3,14 @@
     "name": "長版羊毛大衣",
     "price": 2490,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(170,88,43)",
-        "colorName": "棕色"
+        "name": "棕色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "外套"
-    },
+    "gender": "women",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/w-coat-1.jpg"
   },
@@ -21,16 +19,14 @@
     "name": "長版羊毛大衣",
     "price": 2490,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(95,97,87)",
-        "colorName": "墨綠色"
+        "name": "墨綠色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "外套"
-    },
+    "gender": "women",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/w-coat-2.jpg"
   },
@@ -39,20 +35,18 @@
     "name": "休閒西裝外套",
     "price": 1490,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(170,157,161)",
-        "colorName": "米色"
+        "name": "米色"
       },
       {
         "rgb": "rgb(49,48,45)",
-        "colorName": "灰色"
+        "name": "灰色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "外套"
-    },
+    "gender": "women",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/w-coat-3.jpg"
   },
@@ -61,16 +55,14 @@
     "name": "造型運動長袖",
     "price": 890,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(192,214,164)",
-        "colorName": "淺綠色"
+        "name": "淺綠色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "上衣"
-    },
+    "gender": "women",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/w-sports-1.jpg"
   },
@@ -79,16 +71,14 @@
     "name": "造型條紋短袖",
     "price": 590,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(233,213,163)",
-        "colorName": "原色"
+        "name": "原色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "上衣"
-    },
+    "gender": "women",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/w-shirt-1.jpg"
   },
@@ -97,16 +87,14 @@
     "name": "純棉長袖",
     "price": 590,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(180,140,116)",
-        "colorName": "棕色"
+        "name": "棕色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "上衣"
-    },
+    "gender": "women",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/w-shirt-2.jpg"
   },
@@ -115,16 +103,14 @@
     "name": "短版透氣上衣",
     "price": 590,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(155,157,158)",
-        "colorName": "灰色"
+        "name": "灰色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "上衣"
-    },
+    "gender": "women",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/w-shirt-3.jpg"
   },
@@ -133,16 +119,14 @@
     "name": "牛仔短裙",
     "price": 790,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(127,157,183)",
-        "colorName": "原色"
+        "name": "原色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "下身"
-    },
+    "gender": "women",
+    "type": "下身",
     "description": "這是個好東西",
     "img": "/image/w-pants-1.jpg"
   },
@@ -151,16 +135,14 @@
     "name": "休閒透氣長褲",
     "price": 790,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(158,151,148)",
-        "colorName": "灰色"
+        "name": "灰色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "下身"
-    },
+    "gender": "women",
+    "type": "下身",
     "description": "這是個好東西",
     "img": "/image/w-pants-2.jpg"
   },
@@ -169,16 +151,14 @@
     "name": "質感連身洋裝",
     "price": 1290,
     "size": ["S", "M"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(10,12,13)",
-        "colorName": "黑色"
+        "name": "黑色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "洋裝"
-    },
+    "gender": "women",
+    "type": "洋裝",
     "description": "這是個好東西",
     "img": "/image/dress-1.jpg"
   },
@@ -187,16 +167,14 @@
     "name": "碎花連身洋裝",
     "price": 1290,
     "size": ["S", "M"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(73,64,59)",
-        "colorName": "原色"
+        "name": "原色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "洋裝"
-    },
+    "gender": "women",
+    "type": "洋裝",
     "description": "這是個好東西",
     "img": "/image/dress-2.jpg"
   },
@@ -205,16 +183,14 @@
     "name": "復古丹寧帽",
     "price": 590,
     "size": ["M"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(38,162,202)",
-        "colorName": "原色"
+        "name": "原色"
       }
     ],
-    "location": {
-      "gender": "women",
-      "type": "配件"
-    },
+    "gender": "women",
+    "type": "配件",
     "description": "這是個好東西",
     "img": "/image/w-hat-1.jpg"
   },
@@ -223,16 +199,14 @@
     "name": "純棉長袖",
     "price": 790,
     "size": ["M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(1,5,11)",
-        "colorName": "黑色"
+        "name": "黑色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "上衣"
-    },
+    "gender": "men",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/m-shirt-4.jpg"
   },
@@ -241,16 +215,14 @@
     "name": "質感西裝外套",
     "price": 1990,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(26,28,31)",
-        "colorName": "黑色"
+        "name": "黑色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "外套"
-    },
+    "gender": "men",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/m-coat-3.jpg"
   },
@@ -259,16 +231,14 @@
     "name": "質感西裝外套",
     "price": 1990,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(185,194,200)",
-        "colorName": "灰色"
+        "name": "灰色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "外套"
-    },
+    "gender": "men",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/m-coat-4.jpg"
   },
@@ -277,16 +247,14 @@
     "name": "西裝外套",
     "price": 1490,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(66,65,68)",
-        "colorName": "灰色"
+        "name": "灰色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "外套"
-    },
+    "gender": "men",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/m-coat-1.jpg"
   },
@@ -295,16 +263,14 @@
     "name": "西裝外套",
     "price": 1490,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(23,38,66)",
-        "colorName": "藍色"
+        "name": "藍色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "外套"
-    },
+    "gender": "men",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/m-coat-2.jpg"
   },
@@ -313,16 +279,14 @@
     "name": "運動套裝",
     "price": 890,
     "size": ["M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(15,15,15)",
-        "colorName": "黑色"
+        "name": "黑色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "運動服裝"
-    },
+    "gender": "men",
+    "type": "運動服裝",
     "description": "這是個好東西",
     "img": "/image/m-sports-1.jpg"
   },
@@ -331,16 +295,14 @@
     "name": "造型運動套裝",
     "price": 890,
     "size": ["M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(68,75,106)",
-        "colorName": "藍色"
+        "name": "藍色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "運動服裝"
-    },
+    "gender": "men",
+    "type": "運動服裝",
     "description": "這是個好東西",
     "img": "/image/m-sports-2.jpg"
   },
@@ -349,16 +311,14 @@
     "name": "涼感透氣短袖",
     "price": 590,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(230,230,230)",
-        "colorName": "白色"
+        "name": "白色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "上衣"
-    },
+    "gender": "men",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/m-shirt-1.jpg"
   },
@@ -367,16 +327,14 @@
     "name": "彈性修身西裝褲",
     "price": 990,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(94,92,98)",
-        "colorName": "灰色"
+        "name": "灰色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "下身"
-    },
+    "gender": "men",
+    "type": "下身",
     "description": "這是個好東西",
     "img": "/image/m-pants-1.jpg"
   },
@@ -385,16 +343,14 @@
     "name": "輕薄休閒襯衫",
     "price": 790,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(233,216,200)",
-        "colorName": "卡其色"
+        "name": "卡其色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "上衣"
-    },
+    "gender": "men",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/m-shirt-2.jpg"
   },
@@ -403,16 +359,14 @@
     "name": "輕薄休閒襯衫",
     "price": 790,
     "size": ["S", "M", "L", "XL"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(31,44,55)",
-        "colorName": "藍色"
+        "name": "藍色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "上衣"
-    },
+    "gender": "men",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/m-shirt-3.jpg"
   },
@@ -421,16 +375,14 @@
     "name": "質感鴨舌帽",
     "price": 590,
     "size": ["M"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(223,224,216)",
-        "colorName": "白色"
+        "name": "白色"
       }
     ],
-    "location": {
-      "gender": "men",
-      "type": "配件"
-    },
+    "gender": "men",
+    "type": "配件",
     "description": "這是個好東西",
     "img": "/image/m-hat-1.jpg"
   },
@@ -439,16 +391,14 @@
     "name": "質感襯衫",
     "price": 590,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(149,146,151)",
-        "colorName": "灰色"
+        "name": "灰色"
       }
     ],
-    "location": {
-      "gender": "kids",
-      "type": "上衣"
-    },
+    "gender": "kids",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/k-shirt-1.jpg"
   },
@@ -457,16 +407,14 @@
     "name": "透氣短袖",
     "price": 390,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(231,231,233)",
-        "colorName": "白色"
+        "name": "白色"
       }
     ],
-    "location": {
-      "gender": "kids",
-      "type": "上衣"
-    },
+    "gender": "kids",
+    "type": "上衣",
     "description": "這是個好東西",
     "img": "/image/k-shirt-2.jpg"
   },
@@ -475,16 +423,14 @@
     "name": "彈性透氣牛仔褲",
     "price": 590,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(52,55,67)",
-        "colorName": "原色"
+        "name": "原色"
       }
     ],
-    "location": {
-      "gender": "kids",
-      "type": "下身"
-    },
+    "gender": "kids",
+    "type": "下身",
     "description": "這是個好東西",
     "img": "/image/k-pants-1.jpg"
   },
@@ -493,16 +439,14 @@
     "name": "質感單寧外套",
     "price": 790,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(31,42,41)",
-        "colorName": "原色"
+        "name": "原色"
       }
     ],
-    "location": {
-      "gender": "kids",
-      "type": "外套"
-    },
+    "gender": "kids",
+    "type": "外套",
     "description": "這是個好東西",
     "img": "/image/k-coat-1.jpg"
   },
@@ -511,16 +455,14 @@
     "name": "造型洋裝",
     "price": 390,
     "size": ["S", "M", "L"],
-    "color": [
+    "colors": [
       {
         "rgb": "rgb(237,215,206)",
-        "colorName": "粉色"
+        "name": "粉色"
       }
     ],
-    "location": {
-      "gender": "kids",
-      "type": "洋裝"
-    },
+    "gender": "kids",
+    "type": "洋裝",
     "description": "這是個好東西",
     "img": "/image/k-dress-1.jpg"
   }

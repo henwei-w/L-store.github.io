@@ -43,9 +43,9 @@ function Card(props) {
 
   return (
     <CustomCol>
-      <Link to={`/Product_detail/${productData.location.gender}/1`}>
+      <Link to={`/Product_detail/${productData.gender}/${productData.id}`}>
         <ImgBackground>
-          <img src={process.env.PUBLIC_URL + productData.img} alt="..." />
+          <img src={`http://43.201.35.210:4000/uploads/${productData.img}`} alt="..." />
 
           <ItemText>
             <p>

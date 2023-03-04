@@ -8,6 +8,7 @@ import * as HTTP from "services/api";
 
 const Background = styled.div`
   padding: 30px;
+  outline: none;
 `;
 
 const Wrap = styled.div`
@@ -178,8 +179,14 @@ function Login() {
   const handleLoadingClose = () => setShowLoading(false);
   const handleWarningClose = () => setShowWarning(false);
 
+  const enter = (e) => {
+    if (e.keyCode === 13) {
+      getAccoountData();
+    }
+  };
+
   return (
-    <Background>
+    <Background tabIndex={0} onKeyUp={(e) => enter(e)}>
       <Wrap>
         登入
         <LoginData>

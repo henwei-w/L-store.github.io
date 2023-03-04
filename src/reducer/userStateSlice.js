@@ -15,6 +15,7 @@ export const userStateSlice = createSlice({
       state.value.data = sessionStorage.getItem("token");
       state.value.username = sessionStorage.getItem("username");
       window.location.href = "/#/";
+      window.location.reload();
     },
   },
 });

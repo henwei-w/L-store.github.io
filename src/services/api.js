@@ -35,23 +35,18 @@ export const register = (payload) =>
       payload.error();
     });
 
-export const getProductList = () =>
-  HTTP.get("/api/v1/productList/")
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+export const getProductList = async () => HTTP.get("/api/v1/productList/");
 
 export const addProduct = (formData) =>
   HTTP.post("/api/v1/product/", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
   })
     .then(function (response) {
       console.log(response);
+      window.location.reload();
     })
     .catch(function (error) {
       console.log(error);
@@ -61,10 +56,29 @@ export const editProduct = (formData) =>
   HTTP.post("/api/v1/productEdit/", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
   })
     .then(function (response) {
       console.log(response);
+      window.location.reload();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+export const deleteProduct = (payload) =>
+  HTTP.delete("/api/v1/product/", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+    params: {
+      id: payload,
+    },
+  })
+    .then(function (response) {
+      console.log(response);
+      window.location.reload();
     })
     .catch(function (error) {
       console.log(error);

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Menu = styled.div`
@@ -45,14 +45,13 @@ const Block = styled.div`
 function TypeMenu(props) {
   const menuTitle = props.menu;
   const path = props.path;
-  const params = useParams();
 
   return (
     <Menu>
       <WpMenu>
         <ul>
           {menuTitle.map((data, index) => (
-            <Link key={index} to={`/${path}/${(params.type = data)}`}>
+            <Link key={index} to={`/${path}/${data}`}>
               <li>{data}</li>
             </Link>
           ))}

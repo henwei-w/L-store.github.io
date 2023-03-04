@@ -4,19 +4,19 @@ import styled from "styled-components";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import ScrollToTop from "helpers/ScrollToTop";
-import HomeView from "./HomeView";
+import Kids from "./Kids";
 
 const CustomModal = styled(Modal)`
   padding-top: 23%;
 `;
 
 const CustomModalBody = styled(Modal.Body)`
-  padding: 150px 50px;
+  padding: 100px 50px;
   text-align: center;
   font-size: 1.8rem;
 `;
 
-function Home() {
+function KidsPage() {
   const [show, setShow] = useState(true);
 
   const [productData, setProductData] = useState([]);
@@ -57,7 +57,7 @@ function Home() {
         </CustomModalBody>
       </CustomModal>
       {show === false ? (
-        <HomeView data={productData} />
+        <Kids data={productData} />
       ) : (
         <span style={{ display: "none" }} />
       )}
@@ -65,4 +65,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default KidsPage;

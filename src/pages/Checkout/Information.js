@@ -147,7 +147,7 @@ function Information() {
             </Store>
           </Transport>
 
-          <Link to="/pay">
+          <Link to="">
             <Submit type="submit">選擇付款方式</Submit>
           </Link>
           <Block />

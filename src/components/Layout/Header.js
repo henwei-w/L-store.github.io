@@ -228,7 +228,7 @@ const CustomDropDownItem = styled(Dropdown.Item)`
 
   &:hover {
     background-color: white;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid ${props => props.username ? "white" : "black"};
   }
 
   &:active {
@@ -265,7 +265,7 @@ function Header() {
       setIcon("user-logout");
       setPath("#/backstage/product");
       setItem("後台管理系統");
-      setName(<CustomDropDownItem>{username}</CustomDropDownItem>);
+      setName(<CustomDropDownItem username="true">{username}</CustomDropDownItem>);
       setLogoutItem(
         <CustomDropDownItem onClick={handleShow}>
           登出

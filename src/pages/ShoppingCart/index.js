@@ -231,7 +231,7 @@ function ShoppingCart() {
   };
 
   const setLocation = (data) => {
-    let location = `${data.location.gender}/${1}`; // 資料id
+    let location = `${data.gender}/${data.id}`;
     return location;
   };
 
@@ -271,7 +271,7 @@ function ShoppingCart() {
               <List key={index} according={index}>
                 <Link to={`/Product_detail/${setLocation(data)}`}>
                   <ImgBackground>
-                    <img src={process.env.PUBLIC_URL + data.img} alt="..." />
+                    <img src={`http://43.201.35.210:4000/uploads/${data.img}`} alt="..." />
                   </ImgBackground>
                 </Link>
 

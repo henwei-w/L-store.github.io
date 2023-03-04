@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
-import { content } from "App";
+import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -29,23 +28,22 @@ const CustomTable = styled(Table)`
 `;
 
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  text-align: end;
-  margin-right: 30%;
+  padding-left: 18%;
 
   & span {
-    margin-bottom: 6px;
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 2px;
   }
 
   & p {
-    margin-right: 85%;
-    font-size: 1.1rem;
+    margin-right: 0.6rem;
+    margin-top: 0.2rem;
   }
-`;
 
-const ImgSpan = styled.span`
-  margin-right: -39.5%;
+  & input {
+    width: 38%;
+  }
 `;
 
 const CustomButton = styled(Button)`
@@ -53,15 +51,22 @@ const CustomButton = styled(Button)`
   margin-top: 20px;
 `;
 
-const CustomModalFooter = styled(Modal.Footer)`
-  margin-right: -43%;
+const ButtonPlus = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.8rem;
+  position: absolute;
+  right: 11%;
 `;
 
-function ProductTable() {
-  const data = useContext(content);
+const AlertMessage = styled.div`
+  color: red;
+  padding-left: 3.3rem;
+`;
 
-  // getProductList api
-  const [dataSource, setDataSource] = useState(data);
+function ProductTable(props) {
+  const dataSource = props.data;
 
   const columns = [
     "ID",
@@ -69,6 +74,7 @@ function ProductTable() {
     "價格",
     "尺寸",
     "顏色",
+    "性別",
     "類別",
     "描述",
     "圖片",
@@ -80,24 +86,89 @@ function ProductTable() {
 
   const [show, setShow] = useState(false);
 
-  const [buttonState, setButtonState] = useState("");
+  const [buttonState, setButtonState] = useState("add");
 
-  var formData = new FormData();
+  const [imgState, setImgState] = useState();
 
-  const [formState, setFormState] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-  const { register, handleSubmit, watch, setValue } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const pushFormData = () => {
+      const formData = new FormData();
 
-  const setImg = (e) => {
-    let newState = [...formState];
-    const img = {
-      key: "img",
-      value: e.target.files[0],
+      const appendSize = (str) => str.split(",");
+
+      const appendColor = () => {
+        let colorsArr = [];
+        for (let i = 0; i < colorQuantity; i++) {
+          const obj = {
+            rgb: data[`rgb${i + 1}`],
+            name: data[`colorName${i + 1}`],
+          };
+          colorsArr.push(obj);
+        }
+        return JSON.stringify(colorsArr);
+      };
+
+      buttonState === "add"
+        ? console.log("addProduct mode")
+        : formData.append("id", dataSource[editIndex].id);
+      formData.append("name", data.name);
+      formData.append("price", data.price);
+      formData.append(
+        "size",
+        buttonState === "add"
+          ? JSON.stringify(appendSize(data.size))
+          : JSON.stringify(data.size)
+      );
+      formData.append("colors", appendColor());
+      formData.append("gender", data.gender);
+      formData.append("type", data.type);
+      formData.append("description", data.description);
+      formData.append("img", imgState);
+
+      buttonState === "add"
+        ? HTTP.addProduct(formData)
+        : HTTP.editProduct(formData);
     };
-    newState.push(img);
-    setFormState(newState);
+
+    pushFormData();
+
+    setShow(false);
   };
+
+  useEffect(() => {
+    const adjustment = (data) => {
+      for (let i = 0; i < data.length; i++) {
+        setValue(`rgb${i + 1}`, data[i].rgb);
+        setValue(`colorName${i + 1}`, data[i].name);
+      }
+    };
+
+    if (buttonState === "edit") {
+      setValue("name", dataSource[editIndex].name);
+      setValue("price", dataSource[editIndex].price);
+      setValue("size", JSON.parse(dataSource[editIndex].size));
+      adjustment(JSON.parse(dataSource[editIndex].colors));
+      setValue("gender", dataSource[editIndex].gender);
+      setValue("type", dataSource[editIndex].type);
+      setValue("description", dataSource[editIndex].description);
+    } else {
+      setValue("name", "");
+      setValue("price", "");
+      setValue("size", []);
+      setValue("rgb1", "");
+      setValue("colorName1", "");
+      setValue("gender", "");
+      setValue("type", "");
+      setValue("description", "");
+    }
+  }, [editIndex, dataSource, buttonState, setValue]);
 
   const startEdit = (index) => {
     setButtonState("edit");
@@ -111,74 +182,65 @@ function ProductTable() {
     setShow(true);
   };
 
-  useEffect(() => {
-    if (buttonState === "edit") {
-      setValue("name", dataSource[editIndex].name);
-      setValue("price", dataSource[editIndex].price);
-      setValue("size", dataSource[editIndex].size);
-      setValue("color", JSON.stringify(dataSource[editIndex].color));
-      setValue("location", JSON.stringify(dataSource[editIndex].location));
-      setValue("description", dataSource[editIndex].description);
-    } else {
-      setValue("name", "");
-      setValue("price", "");
-      setValue("size", []);
-      setValue("color", []);
-      setValue("location", "");
-      setValue("description", "");
-    }
-  }, [editIndex, dataSource, buttonState, setValue]);
-
-  const storeData = () => {
-    const formValue = watch();
-    const valueArr = Object.values(formValue);
-    let valueState = 0;
-    for (let i = 0; i < valueArr.length; i++) {
-      if (valueArr[i] === "") {
-        alert("商品資料未填寫完整");
-        break;
-      }
-      valueState++;
-    }
-
-    const pushFormData = () => {
-      for (let i = 0; i < formState.length; i++) {
-        formData.append(formState[i].key, formState[i].value);
-      }
-
-      buttonState === "add"
-        ? HTTP.addProduct(formData)
-        : HTTP.editProduct(formData);
-    };
-
-    const setNewValue = () => {
-      if (formState[0].hasOwnProperty("img")) {
-        let newState = [...formState];
-        newState.push({ key: "name", value: formValue.name });
-        newState.push({ key: "price", value: formValue.price });
-        newState.push({ key: "size", value: formValue.size });
-        newState.push({ key: "color", value: JSON.parse(formValue.color) });
-        newState.push({ key: "location", value: JSON.parse(formValue.location) });
-        newState.push({ key: "description", value: formValue.description });
-        setFormState(newState);
-
-        pushFormData();
-      } else {
-        alert("選擇要上傳的圖片");
-      }
-    };
-
-    valueState === 7 ? setNewValue() : console.log("error");
-
-    setShow(false);
+  const deleteData = (id) => {
+    HTTP.deleteProduct(id);
+    alert("刪除成功！");
   };
 
-  const deleteData = (index) => {
-    let newState = [...dataSource];
-    newState.splice(index, 1);
-    setDataSource(newState);
+  const fixSizeView = (value) => {
+    return <>{JSON.parse(value).map((data) => data + " ")}</>;
+  };
 
-    // deleteProduct api
+  const fixColorView = (value) => {
+    let color = [];
+    for (let i = 0; i < value.length; i++) {
+      color.push([value[i].rgb, value[i].name]);
+    }
+    return <>{color.map((data) => data[0] + data[1] + " ")}</>;
+  };
+
+  const colorInputRender = (data) => {
+    let render = [];
+    for (let i = 0; i < data; i++) {
+      render.push(
+        <span key={i} style={{ margin: "0px" }}>
+          <input
+            key={`rgb${i}`}
+            {...register(`rgb${i + 1}`, { required: "*必填" })}
+          />
+          <input
+            key={`colorName${i}`}
+            {...register(`colorName${i + 1}`, { required: "*必填" })}
+          />
+          <ButtonPlus
+            variant="outline-secondary"
+            size="sm"
+            onClick={() => setColorQuantity(colorQuantity - 1)}
+          >
+            -
+          </ButtonPlus>
+        </span>
+      );
+    }
+    return render;
+  };
+
+  useEffect(() => {
+    setColorQuantity(
+      buttonState === "edit"
+        ? JSON.parse(dataSource[editIndex].colors).length
+        : 1
+    );
+  }, [editIndex, buttonState, dataSource]);
+
+  const [colorQuantity, setColorQuantity] = useState(
+    buttonState === "edit" ? JSON.parse(dataSource[editIndex].colors).length : 1
+  );
+
+  const colorAlert = () => {
+    if (!!errors.rgb1 || !!errors.colorName1) {
+      return <AlertMessage>*必填</AlertMessage>;
+    }
   };
 
   return (
@@ -194,51 +256,80 @@ function ProductTable() {
         <Modal.Body>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <span>
-              <p>ID : {editIndex + 1}</p>
+              <p>名稱 : </p>
+              <input {...register("name", { required: "*必填" })} />
             </span>
+            {!!errors.name && (
+              <AlertMessage>{errors.name.message}</AlertMessage>
+            )}
             <span>
-              名稱 : <input {...register("name", { required: true })} />
+              <p>價格 : </p>
+              <input {...register("price", { required: "*必填" })} />
             </span>
+            {!!errors.price && (
+              <AlertMessage>{errors.price.message}</AlertMessage>
+            )}
             <span>
-              價格 : <input {...register("price", { required: true })} />
+              <p>尺寸 : </p>
+              <input {...register("size", { required: "*必填" })} />
             </span>
+            {!!errors.size && (
+              <AlertMessage>{errors.size.message}</AlertMessage>
+            )}
             <span>
-              尺寸 : <input {...register("size", { required: true })} />
+              <p>顏色 : </p>
+              <div>{colorInputRender(colorQuantity).map((data) => data)}</div>
+              <ButtonPlus
+                variant="outline-secondary"
+                size="sm"
+                onClick={() => setColorQuantity(colorQuantity + 1)}
+              >
+                +
+              </ButtonPlus>
             </span>
+            {colorAlert()}
             <span>
-              顏色 : <input {...register("color", { required: true })} />
+              <p>性別 : </p>
+              <input {...register("gender", { required: "*必填" })} />
             </span>
+            {!!errors.gender && (
+              <AlertMessage>{errors.gender.message}</AlertMessage>
+            )}
             <span>
-              類別 : <input {...register("location", { required: true })} />
+              <p>類別 : </p>
+              <input {...register("type", { required: "*必填" })} />
             </span>
+            {!!errors.type && (
+              <AlertMessage>{errors.type.message}</AlertMessage>
+            )}
             <span>
-              描述 : <input {...register("description", { required: true })} />
+              <p>描述 : </p>
+              <input {...register("description", { required: "*必填" })} />
             </span>
-            <ImgSpan>
-              圖片 :{" "}
+            {!!errors.description && (
+              <AlertMessage>{errors.description.message}</AlertMessage>
+            )}
+            <span>
+              <p>圖片 : </p>
               <input
                 type="file"
-                accept=".png, .jpg, .jpeg"
-                {...register("img", { required: true })}
-                onChange={(e) => setImg(e)}
+                {...register("img", { required: "*必填" })}
+                onChange={(e) => setImgState(e.target.files[0])}
               />
-            </ImgSpan>
+            </span>
+            {!!errors.img && <AlertMessage>{errors.img.message}</AlertMessage>}
 
-            <CustomModalFooter>
+            <Modal.Footer>
               <Button
                 variant="outline-secondary"
                 onClick={() => setShow(false)}
               >
                 取消
               </Button>
-              <Button
-                variant="secondary"
-                type="submit"
-                onClick={() => storeData()}
-              >
+              <Button variant="secondary" type="submit">
                 {buttonState === "add" ? "新增" : "編輯"}
               </Button>
-            </CustomModalFooter>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
       </Modal>
@@ -253,14 +344,15 @@ function ProductTable() {
         <tbody>
           {dataSource.map((value, index) => (
             <tr key={index}>
-              <td>{index + 1}</td>
+              <td>{value.id}</td>
               <td>{value.name}</td>
               <td>{value.price}</td>
-              <td>{value.size}</td>
-              <td>{JSON.stringify(value.color)}</td>
-              <td>{JSON.stringify(value.location)}</td>
+              <td>{fixSizeView(value.size)}</td>
+              <td>{fixColorView(JSON.parse(value.colors))}</td>
+              <td>{value.gender}</td>
+              <td>{value.type}</td>
               <td>{value.description}</td>
-              <td></td>
+              <td>{value.img}</td>
               <td>
                 <Button variant="secondary" onClick={() => startEdit(index)}>
                   編輯
@@ -269,7 +361,7 @@ function ProductTable() {
               <td>
                 <Button
                   variant="outline-danger"
-                  onClick={() => deleteData(index)}
+                  onClick={() => deleteData(value.id)}
                 >
                   刪除
                 </Button>

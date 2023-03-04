@@ -1,328 +1,67 @@
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import ProductMenu from "../../components/TypeMenu";
+import * as HTTP from "services/api";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { addOrder } from "../../reducer/cartDataSlice";
-import { useDispatch } from "react-redux";
-import { useContext } from "react";
-import { content } from "../../App";
+import Modal from "react-bootstrap/Modal";
+import Spinner from "react-bootstrap/Spinner";
+import Detail from "./Detail";
+import ScrollToTop from "helpers/ScrollToTop";
 
-const DetailContainer = styled.div`
-  width: 100%;
-  padding: 50px 10px;
-  z-index: 10;
-`;
-
-const DetailWrap = styled.div`
-  margin: auto;
-  max-width: 1200px;
-
-  @media screen and (min-width: 992px) {
-    display: flex;
-    padding: 50px 12%;
-  }
-`;
-
-const ImgBackground = styled.div`
-  width: 0;
-  max-width: 333px;
-  min-width: 300px;
-  height: 0;
-  max-height: 500px;
-  min-height: 450px;
-  margin: auto;
-
-  & img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const Wrap = styled.div`
-  margin-top: 50px;
-
-  @media screen and (min-width: 992px) {
-    margin-left: 8%;
-    margin-top: 0px;
-  }
-`;
-
-const Text = styled.div`
-  font-size: 1.3rem;
-  line-height: 2rem;
-  margin-top: 20px;
-  margin-left: 58px;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-
-  & h1 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-
-    @media screen and (min-width: 992px) {
-      margin-bottom: 20px;
-    }
-  }
-
-  & h2 {
-    font-size: 1.5rem;
-    margin-top: 10px;
-    margin-bottom: 20px;
-
-    @media screen and (min-width: 992px) {
-      margin-bottom: 35px;
-    }
-  }
-`;
-
-const Option = styled.div`
-  margin-bottom: 10px;
-  display: flex;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-
-  & p {
-    width: 1.8rem;
-    height: 1.5rem;
-    font-size: 1.6rem;
-    text-align: center;
-    cursor: pointer;
-  }
-
-  & span {
-    width: 1.8rem;
-    height: 1.5rem;
-    font-size: 1.6rem;
-    margin-top: 0.1rem;
-    text-align: center;
-    cursor: default;
-  }
-`;
-
-const ColorControl = styled.input`
+const CustomModal = styled(Modal)`
   position: absolute;
-  top: -100%;
-  display: none;
-
-  &:checked ~ .color {
-    border: 2px solid rgb(100, 100, 100);
-    box-shadow: 0 0 0 2px darkgray;
-  }
+  top: 23%;
 `;
 
-const Color = styled.label.attrs({ className: "color" })`
-  width: 1.6rem;
-  height: 1.6rem;
-  margin-top: 0.136rem;
-  margin-right: 1.2rem;
-  cursor: pointer;
-`;
-
-const SizeControl = styled.input`
-  position: absolute;
-  top: -100%;
-  display: none;
-
-  &:checked ~ .size {
-    border: 2px solid rgb(100, 100, 100);
-    box-shadow: 0 0 0 2px darkgray;
-  }
-`;
-
-const Size = styled.label.attrs({ className: "size" })`
-  width: 2rem;
-  height: 2rem;
-  margin-top: 0.036rem;
-  margin-right: 1.2rem;
-  border: 1px solid black;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Button = styled.ul`
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-
-  & a {
-    text-decoration: none;
-    color: black;
-    font-size: 1.5rem;
-  }
-
-  & li {
-    width: 11rem;
-    height: 3.5rem;
-    margin: 0px 10px;
-    border: 2.5px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media screen and (min-width: 992px) {
-    margin-top: 36%;
-  }
+const CustomModalBody = styled(Modal.Body)`
+  padding: 150px 50px;
+  text-align: center;
+  font-size: 1.8rem;
 `;
 
 function ProductDetail() {
-  const dispatch = useDispatch();
-  const productData = useContext(content); // get api 取出與womenpage 相同 index 的資料
+  const [show, setShow] = useState(true);
 
-  const params = useParams();
+  const [productData, setProductData] = useState([]);
 
-  let data;
-  if(params.id){
-    data = productData[params.id];
-  }
-
-  let menuTitle;
-  switch (data.location.gender) {
-    case "women":
-      menuTitle = ["上衣", "下身", "洋裝", "外套", "配件"];
-      break;
-
-    case "men":
-      menuTitle = ["上衣", "下身", "外套", "運動服裝", "配件"];
-      break;
-
-    case "kids":
-      menuTitle = ["上衣", "下身", "外套", "洋裝"];
-      break;
-
-    default:
-      break;
-  }
-
-  let color = data.color;
-  let size = data.size;
-
-  const [orderColor, setOrderColor] = useState("");
-  const [orderSize, setOrderSize] = useState("");
-  const [total, setTotal] = useState(1);
-
-  let order = {
-    id: data.id,
-    location: data.location,
-    name: data.name,
-    img: data.img,
-    price: data.price,
-    color: orderColor,
-    size: orderSize,
-    total: total,
-  };
-
-  const orderState = orderColor && orderSize && "ready";
-
-  const [orderValue, setOrderValue] = useState(false);
-
-  function setCart() {
-    dispatch(addOrder(order));
-    setOrderValue(true);
-  }
-
-  const cancel = (e) => {
-    e.preventDefault();
-  };
-
-  function set(e) {
-    orderState
-      ? setCart() || alert("成功加入購物車") //類似行為裝成function
-      : alert("請選擇顏色及尺寸") || cancel(e);
-  }
+  useEffect(() => {
+    HTTP.getProductList()
+      .then((response) => {
+        setProductData(response.data);
+        setShow(false);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <>
-      <ProductMenu path={data.location.gender} menu={menuTitle} />
-
-      <DetailContainer>
-        <DetailWrap>
-          <ImgBackground>
-            <img src={process.env.PUBLIC_URL + data.img} alt="..." />
-          </ImgBackground>
-
-          <Wrap>
-            <Text>
-              <h1>{data.name}</h1>
-              <h2>{`NT$ ${data.price}`}</h2>
-
-              <form>
-                <Option>
-                  顏色：
-                  {color.map((data, index) => (
-                    <div key={index}>
-                      <ColorControl
-                        type="radio"
-                        name="color"
-                        key={`c${index}`}
-                        id={`color${index}`}
-                      />
-                      <Color
-                        onClick={() => setOrderColor(data.colorName)}
-                        key={`ckey${index}`}
-                        htmlFor={`color${index}`}
-                        style={{ backgroundColor: data.rgb }}
-                      />
-                    </div>
-                  ))}
-                </Option>
-
-                <Option>
-                  尺寸：
-                  {size.map((data, index) => (
-                    <div key={index}>
-                      <SizeControl
-                        type="radio"
-                        name="size"
-                        key={`s${index}`}
-                        id={`size${index}`}
-                      />
-                      <Size
-                        onClick={() => setOrderSize(data)}
-                        key={`skey${index}`}
-                        htmlFor={`size${index}`}
-                      >
-                        {data}
-                      </Size>
-                    </div>
-                  ))}
-                </Option>
-              </form>
-
-              <Option>
-                數量：{" "}
-                <p
-                  onClick={() =>
-                    total > 0 ? setTotal(total - 1) : setTotal(total)
-                  }
-                >
-                  -
-                </p>
-                <span>{total}</span>
-                <p onClick={() => setTotal(total + 1)}>+</p>
-              </Option>
-            </Text>
-
-            <Button>
-              <Link to="#" onClick={() => set()}>
-                <li>加入購物車</li>
-              </Link>
-              <Link
-                to="/cart"
-                onClick={(e) => (orderValue ? console.log("success") : set(e))}
-              >
-                <li>立即購買</li>
-              </Link>
-            </Button>
-          </Wrap>
-        </DetailWrap>
-      </DetailContainer>
+      <ScrollToTop />
+      <CustomModal show={show}>
+        <CustomModalBody>
+          Loading
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginLeft: "10px", marginRight: "6px" }}
+          />
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginRight: "6px" }}
+          />
+          <Spinner
+            animation="grow"
+            variant="secondary"
+            size="sm"
+            style={{ marginRight: "6px" }}
+          />
+        </CustomModalBody>
+      </CustomModal>
+      {show === false ? (
+        <Detail data={productData} />
+      ) : (
+        <span style={{ display: "none" }} />
+      )}
     </>
   );
 }

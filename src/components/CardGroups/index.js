@@ -23,15 +23,15 @@ const CustomRow = styled(Row)`
 
 function CardGroups(props) {
   const title = props.title;
-  const productData = props.data;
+  const product = props.data;
 
   return (
     <Container>
       <Title>{title}</Title>
 
       <CustomRow xs={2} md={3} xl={4}>
-        {productData.map((data, index) => (
-          <Card key={index} data={data} />
+        {product.map((value, index) => (
+          <Card key={index} data={value} />
         ))}
       </CustomRow>
     </Container>

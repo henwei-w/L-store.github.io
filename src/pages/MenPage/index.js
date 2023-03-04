@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import ScrollToTop from "helpers/ScrollToTop";
-import HomeView from "./HomeView";
+import Men from "./Men";
 
 const CustomModal = styled(Modal)`
   padding-top: 23%;
@@ -16,7 +16,7 @@ const CustomModalBody = styled(Modal.Body)`
   font-size: 1.8rem;
 `;
 
-function Home() {
+function MenPage() {
   const [show, setShow] = useState(true);
 
   const [productData, setProductData] = useState([]);
@@ -57,7 +57,7 @@ function Home() {
         </CustomModalBody>
       </CustomModal>
       {show === false ? (
-        <HomeView data={productData} />
+        <Men data={productData} />
       ) : (
         <span style={{ display: "none" }} />
       )}
@@ -65,4 +65,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default MenPage;

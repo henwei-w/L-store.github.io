@@ -78,7 +78,7 @@ function Banner() {
       </CustomItem>
 
       <CustomItem interval={5000}>
-        <Link to="/Product_detail/women/2">
+        <Link to="/Product_detail/women/83">
           <img
             src={process.env.PUBLIC_URL + "/image/banner-img-2.jpg"}
             className="d-block"
@@ -95,7 +95,7 @@ function Banner() {
       </CustomItem>
 
       <CustomItem interval={5000}>
-        <Link to="/Product_detail/men/21">
+        <Link to="/Product_detail/men/99">
           <img
             src={process.env.PUBLIC_URL + "/image/banner-img-3.jpg"}
             className="d-block"
