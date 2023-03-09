@@ -15,7 +15,6 @@ import Backstage from "./pages/Management/Backstage";
 import NotFound from "pages/NotFound";
 
 function App() {
-
   return (
     <HashRouter>
       <Header />
@@ -67,6 +66,7 @@ function App() {
         </Routes>
       </div>
 
+      <div style={{ width: "100%", height: "10rem" }} />
       <Footer />
     </HashRouter>
   );

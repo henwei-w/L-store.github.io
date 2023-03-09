@@ -11,6 +11,7 @@ import {
 
 const Background = styled.div`
   padding: 0px 20px;
+  margin-bottom: 10px;
 `;
 
 const Cart = styled.div`
@@ -236,7 +237,7 @@ function ShoppingCart() {
   };
 
   const reSort = (value) => {
-    dispatch(sort(value))
+    dispatch(sort(value));
   };
 
   return (
@@ -271,7 +272,10 @@ function ShoppingCart() {
               <List key={index} according={index}>
                 <Link to={`/Product_detail/${setLocation(data)}`}>
                   <ImgBackground>
-                    <img src={`http://43.201.35.210:4000/uploads/${data.img}`} alt="..." />
+                    <img
+                      src={`http://43.201.35.210:4000/uploads/${data.img}`}
+                      alt="..."
+                    />
                   </ImgBackground>
                 </Link>
 
