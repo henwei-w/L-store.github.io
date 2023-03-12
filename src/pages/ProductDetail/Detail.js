@@ -228,7 +228,7 @@ function Detail(props) {
         <DetailWrap>
           <ImgBackground>
             <img
-              src={`http://43.201.35.210:4000/uploads/${data.img}`}
+              src={`https://henry-wu-1130.com:4000/uploads/${data.img}`}
               alt="..."
             />
           </ImgBackground>

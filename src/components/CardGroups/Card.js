@@ -45,7 +45,7 @@ function Card(props) {
     <CustomCol>
       <Link to={`/Product_detail/${productData.gender}/${productData.id}`}>
         <ImgBackground>
-          <img src={`http://43.201.35.210:4000/uploads/${productData.img}`} alt="..." />
+          <img src={`https://henry-wu-1130.com:4000/uploads/${productData.img}`} alt="..." />
 
           <ItemText>
             <p>
