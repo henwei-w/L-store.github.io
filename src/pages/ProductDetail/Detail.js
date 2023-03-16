@@ -158,16 +158,17 @@ const CustomButton = styled.ul`
   & li {
     width: 11rem;
     height: 3.5rem;
+    background-color: rgb(235, 235, 235);
     margin: 0px 10px;
     border: 2.5px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 6px;
-    box-shadow: 0 0 2px 0.8px rgb(50, 50, 50);
+    border-radius: 5px;
+    box-shadow: 0 0 1px 1px rgb(120, 120, 120);
 
     &:active {
-      box-shadow: 0 0 2px 0.8px white;
+      box-shadow: inset 0 0 3px 3px rgb(120, 120, 120);
     }
   }
 

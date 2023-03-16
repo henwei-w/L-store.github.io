@@ -30,6 +30,7 @@ const Edit = styled.input`
 `;
 
 const EditButton = styled.label`
+  background-color: rgb(235, 235, 235);
   font-size: 1.6rem;
   padding: 6px 10px 5px;
   margin-bottom: 10px;
@@ -38,11 +39,11 @@ const EditButton = styled.label`
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  border-radius: 6px;
-  box-shadow: 0 0 3px 0.33px rgb(50, 50, 50);
+  border-radius: 5px;
+  box-shadow: 0 0 0.5px 0.5px rgb(120, 120, 120);
 
   &:active {
-    box-shadow: 0 0 3px 0.33px white;
+    box-shadow: inset 0 0 2px 2px rgb(120, 120, 120);
   }
 `;
 
@@ -137,11 +138,11 @@ const Delete = styled.div`
   position: absolute;
   top: 15%;
   right: 5%;
-  border-radius: 6px;
-  box-shadow: 0 0 3px 0.33px rgb(149, 8, 9);
+  border-radius: 5px;
+  box-shadow: 0 0 1.2px 1.2px rgb(149, 8, 9);
 
   &:active {
-    box-shadow: 0 0 3px 0.33px white;
+    box-shadow: inset 0 0 2px 2px rgb(149, 8, 9);
   }
 `;
 
@@ -159,21 +160,22 @@ const FinalPrice = styled.div`
 const Pay = styled(Link)`
   text-decoration: none;
   color: black;
+  background-color: rgb(235, 235, 235);
   font-size: 1.6rem;
   position: relative;
   left: calc(100% - 6.4rem - 45px);
   top: 65px;
   padding: 10px 20px;
   border: 2.5px solid black;
-  border-radius: 6px;
-  box-shadow: 0 0 3.5px 1px rgb(50, 50, 50);
+  border-radius: 5px;
+  box-shadow: 0 0 0.8px 0.8px rgb(120, 120, 120);
 
   &:hover {
     color: black;
   }
 
   &:active {
-    box-shadow: 0 0 3.5px 1px white;
+    box-shadow: inset 0 0 3px 3px rgb(120, 120, 120);
   }
 `;
 
@@ -186,10 +188,10 @@ const CustomDropdown = styled(Dropdown)`
 const CustomDropdownToggle = styled(Dropdown.Toggle)`
   font-size: 1.2rem;
   color: black;
-  background-color: white;
+  background-color: rgb(235, 235, 235) !important;
   border: 1.5px solid black;
-  border-radius: 6px;
-  box-shadow: 0 0 3px 0.33px rgb(50, 50, 50);
+  border-radius: 5px;
+  box-shadow: 0 0 0.5px 0.5px rgb(120, 120, 120);
 
   &:hover {
     color: black;
@@ -198,8 +200,8 @@ const CustomDropdownToggle = styled(Dropdown.Toggle)`
 
   &:active {
     color: black !important;
-    background-color: white !important;
-    box-shadow: 0 0 3px 0.33px white;
+    background-color: rgb(235, 235, 235) !important;
+    box-shadow: inset 0 0 2px 2px rgb(120, 120, 120);
   }
 `;
 

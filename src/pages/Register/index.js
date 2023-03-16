@@ -54,21 +54,21 @@ const RegisterBtn = styled.input`
   color: black;
   position: absolute;
   top: 350px;
-  left: 20%;
+  left: 21.5%;
   width: 200px;
   height: 50px;
   font-size: 20px;
-  background-color: white;
+  background-color: rgb(235, 235, 235);
   border: 2px solid black;
-  border-radius: 6px;
-  box-shadow: 0 0 3px 1px rgb(50, 50, 50);
+  border-radius: 5px;
+  box-shadow: 0 0 1px 1px rgb(120, 120, 120);
 
   @media screen and (min-width: 768px) {
     left: 30%;
   }
 
   &:active {
-    box-shadow: 0 0 3px 1px white;
+    box-shadow: inset 0 0 3px 3px rgb(120, 120, 120);
   }
 `;
 

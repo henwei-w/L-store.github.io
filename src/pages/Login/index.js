@@ -54,19 +54,19 @@ const LoginData = styled.div`
 
 const LoginBtn = styled.input`
   color: black;
-  position: absolute;
-  top: 180px;
-  left: 15px;
+  margin: auto;
+  position: relative;
+  top: 60px;
   width: 200px;
   height: 50px;
   font-size: 20px;
-  background-color: white;
+  background-color: rgb(235, 235, 235);
   border: 2px solid black;
-  border-radius: 6px;
-  box-shadow: 0 0 3px 1px rgb(50, 50, 50);
+  border-radius: 5px;
+  box-shadow: 0 0 1px 1px rgb(120, 120, 120);
 
   &:active {
-    box-shadow: 0 0 3px 1px white;
+    box-shadow: inset 0 0 3px 3px rgb(120, 120, 120);
   }
 `;
 
@@ -87,7 +87,7 @@ const Register = styled.div`
     height: 50px;
     font-size: 20px;
     margin: auto;
-    background-color: white;
+    background-color: rgb(235, 235, 235);
     border: 2px solid black;
     color: black;
     text-decoration: none;
@@ -95,11 +95,11 @@ const Register = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 60px;
-    border-radius: 6px;
-    box-shadow: 0 0 3px 1px rgb(50, 50, 50);
+    border-radius: 5px;
+    box-shadow: 0 0 1px 1px rgb(120, 120, 120);
 
     &:active {
-      box-shadow: 0 0 3px 1px white;
+      box-shadow: inset 0 0 3px 3px rgb(120, 120, 120);
     }
   }
 `;

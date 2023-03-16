@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 
 const Background = styled.div`
   padding: 30px;
@@ -22,6 +21,9 @@ const Info = styled.div`
 
 const Form = styled.form`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Basic = styled.div`
@@ -29,7 +31,6 @@ const Basic = styled.div`
   flex-direction: column;
   text-align: end;
   margin-top: 50px;
-  margin-right: 25%;
 
   & label {
     margin-bottom: 15px;
@@ -41,7 +42,6 @@ const Transport = styled.div`
   margin-top: 35px;
   font-size: 1.2rem;
   text-align: end;
-  margin-right: 25%;
 `;
 
 const ToHome = styled.input`
@@ -76,20 +76,21 @@ const Store = styled.div.attrs({ className: "store" })`
 `;
 
 const Submit = styled.input`
+  width: 200px;
+  height: 50px;
+  position: relative;
+  top: 100px;
   font-size: 1.6rem;
   text-decoration: none;
   color: black;
-  background-color: white;
-  position: absolute;
-  top: 300px;
-  left: calc(100% - 9.6rem - 45px);
+  background-color: rgb(235, 235, 235);
   padding: 10px 20px;
   border: 2.5px solid black;
-  border-radius: 6px;
-  box-shadow: 0 0 3px 1px rgb(50, 50, 50);
+  border-radius: 5px;
+  box-shadow: 0 0 1px 1px rgb(120, 120, 120);
 
   &:active {
-    box-shadow: 0 0 3px 1px white;
+    box-shadow: inset 0 0 3px 3px rgb(120, 120, 120);
   }
 `;
 
@@ -147,9 +148,8 @@ function Information() {
             </Store>
           </Transport>
 
-          <Link to="">
-            <Submit type="submit" value="選擇付款方式" />
-          </Link>
+          <Submit type="submit" value="選擇付款方式" />
+
           <Block />
         </Form>
       </Info>
