@@ -8,6 +8,7 @@ import {
   decrementOrderTotal,
   sort,
 } from "../../reducer/cartDataSlice";
+import ScrollToTop from "helpers/ScrollToTop";
 
 const Background = styled.div`
   padding: 0px 20px;
@@ -37,11 +38,11 @@ const EditButton = styled.label`
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  border-radius: 6px;
+  box-shadow: 0 0 3px 0.33px rgb(50, 50, 50);
 
   &:active {
-    color: white;
-    background-color: rgb(76, 84, 89);
-    border: 1.5px solid rgb(76, 84, 89);
+    box-shadow: 0 0 3px 0.33px white;
   }
 `;
 
@@ -60,7 +61,8 @@ const DeleteCover = styled.div.attrs({ className: "deleteCover" })`
 const List = styled.li`
   display: flex;
   position: relative;
-  border: 2px solid black;
+  border-top: 2px dotted black;
+  border-bottom: 2px dotted black;
   margin-bottom: -2px;
   background-color: white;
   z-index: 15;
@@ -89,18 +91,14 @@ const Text = styled.div`
 
   & div {
     cursor: default;
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
+    margin-top: 8px;
+    font-size: 1.35rem;
   }
 `;
 
 const Name = styled.div`
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 `;
-
-const Color = styled.div``;
-
-const Size = styled.div``;
 
 const Total = styled.div`
   display: flex;
@@ -108,14 +106,14 @@ const Total = styled.div`
   & p {
     margin: 0px 5px;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     position: relative;
-    top: -0.26rem;
+    top: -0.28rem;
   }
 
   & h1 {
     cursor: default;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     position: relative;
     top: -0.2rem;
   }
@@ -139,9 +137,11 @@ const Delete = styled.div`
   position: absolute;
   top: 15%;
   right: 5%;
+  border-radius: 6px;
+  box-shadow: 0 0 3px 0.33px rgb(149, 8, 9);
 
   &:active {
-    background-color: white;
+    box-shadow: 0 0 3px 0.33px white;
   }
 `;
 
@@ -165,15 +165,15 @@ const Pay = styled(Link)`
   top: 65px;
   padding: 10px 20px;
   border: 2.5px solid black;
+  border-radius: 6px;
+  box-shadow: 0 0 3.5px 1px rgb(50, 50, 50);
 
   &:hover {
     color: black;
   }
 
   &:active {
-    color: white;
-    background-color: rgb(76, 84, 89);
-    border: 2.5px solid rgb(76, 84, 89);
+    box-shadow: 0 0 3.5px 1px white;
   }
 `;
 
@@ -184,14 +184,22 @@ const CustomDropdown = styled(Dropdown)`
 `;
 
 const CustomDropdownToggle = styled(Dropdown.Toggle)`
-  border-radius: 0;
   font-size: 1.2rem;
   color: black;
   background-color: white;
+  border: 1.5px solid black;
+  border-radius: 6px;
+  box-shadow: 0 0 3px 0.33px rgb(50, 50, 50);
 
   &:hover {
     color: black;
     background-color: white;
+  }
+
+  &:active {
+    color: black !important;
+    background-color: white !important;
+    box-shadow: 0 0 3px 0.33px white;
   }
 `;
 
@@ -242,6 +250,7 @@ function ShoppingCart() {
 
   return (
     <Background>
+      <ScrollToTop />
       <Cart>
         <Edit type="checkbox" id="edit" />
         <EditButton htmlFor="edit">編輯</EditButton>
@@ -273,7 +282,7 @@ function ShoppingCart() {
                 <Link to={`/Product_detail/${setLocation(data)}`}>
                   <ImgBackground>
                     <img
-                      src={`https://henry-wu-1130.com:4000/uploads/${data.img}`}
+                      src={`${process.env.REACT_APP_API_URL}/uploads/${data.img}`}
                       alt="..."
                     />
                   </ImgBackground>
@@ -281,8 +290,8 @@ function ShoppingCart() {
 
                 <Text>
                   <Name>{data.name}</Name>
-                  <Color>顏色：{data.color}</Color>
-                  <Size>尺寸：{data.size}</Size>
+                  <div>顏色：{data.color}</div>
+                  <div>尺寸：{data.size}</div>
                   <Total>
                     數量：
                     <p
@@ -307,7 +316,7 @@ function ShoppingCart() {
         </form>
 
         <FinalPrice>總金額： NT$ {finalTotal()}</FinalPrice>
-        <Pay to="/info">購買商品</Pay>
+        {finalTotal() !== 0 ? <Pay to="/info">購買商品</Pay> : false}
       </Cart>
     </Background>
   );

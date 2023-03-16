@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 
 const Title = styled.div`
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   margin: 60px 0px 30px 0px;
   text-align: center;
 `;
@@ -24,6 +24,7 @@ const CustomRow = styled(Row)`
 function CardGroups(props) {
   const title = props.title;
   const product = props.data;
+  const label = props.label
 
   return (
     <Container>
@@ -31,7 +32,7 @@ function CardGroups(props) {
 
       <CustomRow xs={2} md={3} xl={4}>
         {product.map((value, index) => (
-          <Card key={index} data={value} />
+          <Card key={index} data={value} label={label} />
         ))}
       </CustomRow>
     </Container>

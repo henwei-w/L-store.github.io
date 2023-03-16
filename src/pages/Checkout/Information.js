@@ -75,7 +75,7 @@ const Store = styled.div.attrs({ className: "store" })`
   margin-top: 15px;
 `;
 
-const Submit = styled.button`
+const Submit = styled.input`
   font-size: 1.6rem;
   text-decoration: none;
   color: black;
@@ -85,11 +85,11 @@ const Submit = styled.button`
   left: calc(100% - 9.6rem - 45px);
   padding: 10px 20px;
   border: 2.5px solid black;
+  border-radius: 6px;
+  box-shadow: 0 0 3px 1px rgb(50, 50, 50);
 
   &:active {
-    color: white;
-    background-color: rgb(76, 84, 89);
-    border: 2.5px solid rgb(76, 84, 89);
+    box-shadow: 0 0 3px 1px white;
   }
 `;
 
@@ -148,7 +148,7 @@ function Information() {
           </Transport>
 
           <Link to="">
-            <Submit type="submit">選擇付款方式</Submit>
+            <Submit type="submit" value="選擇付款方式" />
           </Link>
           <Block />
         </Form>

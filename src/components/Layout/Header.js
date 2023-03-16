@@ -114,7 +114,7 @@ const RwdMenu = styled.div.attrs({ className: "rwdMenu" })`
   }
 
   & li {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     border-bottom: 2px solid gray;
     padding: 12px;
 
@@ -172,6 +172,7 @@ const LogIn = styled.ul`
   z-index: 30;
 
   & span {
+    color: rgb(20, 20, 20);
     width: 32px;
     height: 32px;
     text-align: center;
@@ -187,6 +188,11 @@ const LogIn = styled.ul`
   li {
     position: relative;
     margin-left: 20px;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
   }
 
   @media screen and (min-width: 992px) {
@@ -218,21 +224,25 @@ const CustomDropdownToggle = styled(Dropdown.Toggle)`
 
 const CustomDropDownMenu = styled(Dropdown.Menu)`
   border-radius: 3;
-  font-size: 1.2rem;
-  padding: 10px 10px;
+  font-size: 1.8rem;
+  padding: 0px;
+  padding-top: 1.5rem;
 `;
 
 const CustomDropDownItem = styled(Dropdown.Item)`
-  border-bottom: 1px solid white;
-  margin: 5px auto;
+  color: black;
+  margin: 15px auto;
+  letter-spacing: 0.06em;
+  text-align: center;
 
   &:hover {
-    background-color: white;
-    border-bottom: 1px solid ${props => props.username ? "white" : "black"};
+    color: ${props => props.username ? "black" : "white"};
+    background-color: ${props => props.username ? "white" : "rgb(100, 100, 100)"};
   }
 
   &:active {
-    background-color: white;
+    color: ${props => props.username ? "black" : "white"};
+    background-color: ${props => props.username ? "white" : "rgb(100, 100, 100)"};
   }
 `;
 

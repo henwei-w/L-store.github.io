@@ -9,7 +9,7 @@ export const login = (payload) =>
       if (response.data.token) {
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("username", payload.username);
-        window.location.href = "/#/backstage/product";
+        window.location.href = "https://henwei-w.github.io/L-store.github.io/#/backstage/product";
         window.location.reload();
       }
     })
@@ -27,7 +27,7 @@ export const register = (payload) =>
       if (response.data.token) {
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("username", payload.username);
-        window.location.href = "/#/backstage/product";
+        window.location.href = "https://henwei-w.github.io/L-store.github.io/#/backstage/product";
         window.location.reload();
       }
     })

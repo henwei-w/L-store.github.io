@@ -4,7 +4,7 @@ const HTTP = axios.create({
   baseURL:
     process.env.NODE_ENV === "development"
       ? window.location.origin
-      : process.env.REACT_APP_URL,
+      : process.env.REACT_APP_API_URL,
   timeout: 30000,
 });
 

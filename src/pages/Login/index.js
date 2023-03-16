@@ -5,6 +5,8 @@ import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import * as HTTP from "services/api";
+import ScrollToTop from "helpers/ScrollToTop";
+import { useForm } from "react-hook-form";
 
 const Background = styled.div`
   padding: 30px;
@@ -14,70 +16,57 @@ const Background = styled.div`
 const Wrap = styled.div`
   max-width: 500px;
   margin: auto;
-  margin-top: 30px;
-  font-size: 1.6rem;
+  margin-top: 50px;
+  font-size: 20px;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-
-  @media screen and (min-width: 992px) {
-    position: relative;
-    left: -25px;
-  }
 `;
 
 const LoginData = styled.div`
-  text-align: end;
   margin-top: 50px;
-  margin-right: 25%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   position: relative;
 
+  & form {
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
   & label {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-top: 30px;
+    font-size: 16px;
   }
 
   & img {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 23px;
+    height: 23px;
     position: absolute;
-    top: calc(2.2rem + 15px);
-    right: 8px;
+    bottom: 1.6px;
+    left: 200px;
     cursor: pointer;
-  }
-
-  & a {
-    width: auto;
-    padding: 3px 0px;
-    font-size: 0.9rem;
-    color: black;
-    text-decoration: none;
-    position: absolute;
-    right: 0px;
-    top: 80px;
-
-    &:hover {
-      border-bottom: 1.5px solid black;
-    }
   }
 `;
 
-const LoginBtn = styled.button`
+const LoginBtn = styled.input`
+  color: black;
   position: absolute;
-  top: 150px;
-  right: 0px;
-  width: 15rem;
-  height: 3rem;
-  font-size: 1.35rem;
+  top: 180px;
+  left: 15px;
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
   background-color: white;
   border: 2px solid black;
+  border-radius: 6px;
+  box-shadow: 0 0 3px 1px rgb(50, 50, 50);
 
   &:active {
-    color: white;
-    background-color: rgb(76, 84, 89);
-    border: 1.5px solid rgb(76, 84, 89);
+    box-shadow: 0 0 3px 1px white;
   }
 `;
 
@@ -87,17 +76,17 @@ const Hr = styled.hr`
 
 const Register = styled.div`
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: 18px;
   display: flex;
   flex-direction: column;
-  text-align: end;
-  margin-right: 40%;
+  text-align: center;
   position: relative;
 
   & a {
-    width: 15rem;
-    height: 3rem;
-    font-size: 1.35rem;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    margin: auto;
     background-color: white;
     border: 2px solid black;
     color: black;
@@ -106,13 +95,11 @@ const Register = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 60px;
-    position: absolute;
-    right: -25%;
+    border-radius: 6px;
+    box-shadow: 0 0 3px 1px rgb(50, 50, 50);
 
     &:active {
-      color: white;
-      background-color: rgb(76, 84, 89);
-      border: 1.5px solid rgb(76, 84, 89);
+      box-shadow: 0 0 3px 1px white;
     }
   }
 `;
@@ -128,11 +115,25 @@ const CustomModalBody = styled(Modal.Body)`
   font-size: 1.8rem;
 `;
 
+const AlertMessageUsername = styled.div`
+  font-size: 16px;
+  color: red;
+  padding-left: 3.3rem;
+  position: absolute;
+  top: 33px;
+`;
+
+const AlertMessagePassword = styled.div`
+  font-size: 16px;
+  color: red;
+  padding-left: 3.3rem;
+  position: absolute;
+  top: 33px;
+`;
+
 function Login() {
   const [eye, setEye] = useState("hide");
   const [passwordState, setPasswordState] = useState("password");
-
-  const [warning, setWarning] = useState("");
 
   const setEyeState = () => {
     eye === "hide" ? setEye("show") : setEye("hide");
@@ -141,37 +142,23 @@ function Login() {
       : setPasswordState("password");
   };
 
-  const getAccoountData = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
     setShowLoading(true);
 
-    let username = document.getElementById("loginUsername").value;
-    let password = document.getElementById("loginPassword").value;
-
-    let checkArr = [username, password];
-    let formState = 0;
-
-    for (let i = 0; i < checkArr.length; i++) {
-      if (checkArr[i] === "") {
-        setWarning("請輸入帳號及密碼");
-        setShowLoading(false);
-        setShowWarning(true);
-        break;
-      }
-      formState += 1;
-    }
-
-    let error = () => {
-      setWarning("帳號或密碼錯誤");
+    const error = () => {
       setShowLoading(false);
       setShowWarning(true);
     };
 
-    let value;
-    formState === 2
-      ? (value = { username: username, password: password, error: error })
-      : console.log("error");
+    const value = { ...data, error: error };
 
-    formState === 2 ? HTTP.login(value) : console.log("error");
+    HTTP.login(value);
   };
 
   const [showLoading, setShowLoading] = useState(false);
@@ -179,38 +166,51 @@ function Login() {
   const handleLoadingClose = () => setShowLoading(false);
   const handleWarningClose = () => setShowWarning(false);
 
-  const enter = (e) => {
-    if (e.keyCode === 13) {
-      getAccoountData();
-    }
-  };
-
   return (
-    <Background tabIndex={0} onKeyUp={(e) => enter(e)}>
+    <Background tabIndex={0}>
+      <ScrollToTop />
       <Wrap>
         登入
         <LoginData>
-          <label>
-            帳號：
-            <input type="text" name="username" id="loginUsername" />
-          </label>
-          <label>
-            密碼：
-            <input type={passwordState} name="password" id="loginPassword" />
-          </label>
-          <img
-            src={process.env.PUBLIC_URL + `/icon/${eye}.png`}
-            alt="..."
-            onClick={() => setEyeState()}
-          />
-          <Link to="">忘記密碼/修改密碼</Link>
-          <LoginBtn type="submit" onClick={() => getAccoountData()}>
-            登入
-          </LoginBtn>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label style={{ position: "relative" }}>
+              帳號：
+              <input
+                id="loginUsername"
+                {...register("username", { required: "*必填" })}
+              />
+              {!!errors.username && (
+                <AlertMessageUsername>
+                  {errors.username.message}
+                </AlertMessageUsername>
+              )}
+            </label>
+
+            <label style={{ position: "relative" }}>
+              密碼：
+              <input
+                type={passwordState}
+                id="loginPassword"
+                {...register("password", { required: "*必填" })}
+              />
+              <img
+                src={process.env.PUBLIC_URL + `/icon/${eye}.png`}
+                alt="..."
+                onClick={() => setEyeState()}
+              />
+              {!!errors.password && (
+                <AlertMessagePassword>
+                  {errors.password.message}
+                </AlertMessagePassword>
+              )}
+            </label>
+
+            <LoginBtn type="submit" value="登入" />
+          </form>
         </LoginData>
         <Hr />
         <Register>
-          還沒加入會員
+          還沒加入會員?
           <Link to="/register">註冊</Link>
           <Block />
         </Register>
@@ -254,7 +254,7 @@ function Login() {
         </Modal.Footer>
       </Modal>
       <Modal show={showWarning} onHide={handleWarningClose} centered>
-        <CustomModalBody>{warning}</CustomModalBody>
+        <CustomModalBody>帳號或密碼錯誤</CustomModalBody>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowWarning(false)}>
             確定

@@ -7,7 +7,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   margin-top: 20px;
   margin-bottom: 40px;
   text-align: center;
@@ -35,7 +35,7 @@ const Text = styled.div`
   position: absolute;
   right: 25px;
   top: 25px;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: bolder;
   line-height: 1.8rem;
   letter-spacing: 0.1rem;

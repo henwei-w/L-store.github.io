@@ -19,6 +19,7 @@ function HomeView(props) {
       <CardGroups
         title={"新品上市"}
         data={findObjectsByIds(data, [82, 84, 85, 88, 91, 92, 97, 104])}
+        label={"new"}
       />
 
       <CardGroups

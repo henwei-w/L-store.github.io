@@ -14,7 +14,7 @@ export const userStateSlice = createSlice({
       sessionStorage.removeItem("username");
       state.value.data = sessionStorage.getItem("token");
       state.value.username = sessionStorage.getItem("username");
-      window.location.href = "/#/";
+      window.location.href = "https://henwei-w.github.io/L-store.github.io/#/";
       window.location.reload();
     },
   },

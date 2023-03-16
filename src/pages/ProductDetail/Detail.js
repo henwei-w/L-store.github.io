@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { addOrder } from "../../reducer/cartDataSlice";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import ScrollToTop from "helpers/ScrollToTop";
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -162,6 +163,12 @@ const CustomButton = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 6px;
+    box-shadow: 0 0 2px 0.8px rgb(50, 50, 50);
+
+    &:active {
+      box-shadow: 0 0 2px 0.8px white;
+    }
   }
 
   @media screen and (min-width: 992px) {
@@ -222,13 +229,14 @@ function Detail(props) {
 
   return (
     <>
+      <ScrollToTop />
       <TypeMenu path={data.gender} menu={menuTitle} />
 
       <DetailContainer>
         <DetailWrap>
           <ImgBackground>
             <img
-              src={`https://henry-wu-1130.com:4000/uploads/${data.img}`}
+              src={`${process.env.REACT_APP_API_URL}/uploads/${data.img}`}
               alt="..."
             />
           </ImgBackground>
@@ -285,7 +293,7 @@ function Detail(props) {
                 數量：{" "}
                 <p
                   onClick={() =>
-                    total > 0 ? setTotal(total - 1) : setTotal(total)
+                    total > 1 ? setTotal(total - 1) : setTotal(total)
                   }
                 >
                   -

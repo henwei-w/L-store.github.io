@@ -55,6 +55,17 @@ const ButtonPlus = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  position: absolute;
+  right: 11%;
+`;
+
+const ButtonMinus = styled(Button)`
+  display: ${props => props.index === 0 ? "none" : "flex"};
+  justify-content: center;
+  align-items: center;
+  width: 1.8rem;
   height: 1.8rem;
   position: absolute;
   right: 11%;
@@ -212,13 +223,14 @@ function ProductTable(props) {
             key={`colorName${i}`}
             {...register(`colorName${i + 1}`, { required: "*必填" })}
           />
-          <ButtonPlus
+          <ButtonMinus
             variant="outline-secondary"
             size="sm"
+            index={i}
             onClick={() => setColorQuantity(colorQuantity - 1)}
           >
             -
-          </ButtonPlus>
+          </ButtonMinus>
         </span>
       );
     }

@@ -20,7 +20,7 @@ const WpMenu = styled.div`
   }
 
   & li {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     height: 100%;
     padding: 0px 10px;
     display: flex;

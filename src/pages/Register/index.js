@@ -4,6 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import styled from "styled-components";
 import * as HTTP from "services/api";
+import ScrollToTop from "helpers/ScrollToTop";
+import { useForm } from "react-hook-form";
 
 const Background = styled.div`
   padding: 30px;
@@ -13,54 +15,60 @@ const Wrap = styled.div`
   max-width: 500px;
   margin: auto;
   margin-top: 30px;
-  font-size: 1.6rem;
+  font-size: 20px;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-
-  @media screen and (min-width: 992px) {
-    position: relative;
-    left: -25px;
-  }
 `;
 
 const RegisterData = styled.div`
-  text-align: end;
   margin-top: 50px;
-  margin-right: 25%;
-  display: flex;
-  flex-direction: column;
   position: relative;
 
+  & form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+
+    @media screen and (min-width: 768px) {
+      margin: auto;
+    }
+  }
+
   & label {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-top: 30px;
+    font-size: 16px;
   }
 
   & img {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 23px;
+    height: 23px;
     position: absolute;
-    top: calc(5.8rem + 30px);
-    right: -30px;
+    top: 32px;
     cursor: pointer;
   }
 `;
 
-const RegisterBtn = styled.button`
+const RegisterBtn = styled.input`
+  color: black;
   position: absolute;
-  top: 220px;
-  right: 0px;
-  width: 15rem;
-  height: 3rem;
-  font-size: 1.35rem;
+  top: 350px;
+  left: 20%;
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
   background-color: white;
   border: 2px solid black;
+  border-radius: 6px;
+  box-shadow: 0 0 3px 1px rgb(50, 50, 50);
+
+  @media screen and (min-width: 768px) {
+    left: 30%;
+  }
 
   &:active {
-    color: white;
-    background-color: rgb(76, 84, 89);
-    border: 1.5px solid rgb(76, 84, 89);
+    box-shadow: 0 0 3px 1px white;
   }
 `;
 
@@ -73,6 +81,38 @@ const CustomModalBody = styled(Modal.Body)`
   padding: 50px;
   text-align: center;
   font-size: 1.8rem;
+`;
+
+const AlertMessageEmail = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 120px;
+`;
+
+const AlertMessageUsername = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 120px;
+`;
+
+const AlertMessagePassword = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 120px;
+`;
+
+const AlertMessagePasswordCheck = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 120px;
 `;
 
 function Register() {
@@ -93,87 +133,95 @@ function Register() {
       : setPasswordState("password");
   };
 
-  const getFormValue = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
     setShowLoading(true);
 
-    let email = document.getElementById("email").value;
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
-    let passwordCheck = document.getElementById("passwordCheck").value;
-
-    let checkArr = [email, username, password, passwordCheck];
-    let formState = 0;
-
-    for (let i = 0; i < checkArr.length; i++) {
-      if (checkArr[i] === "") {
-        setWarning("尚有未填寫的資料");
-        setShowLoading(false);
-        setShowWarning(true);
-        break;
-      }
-      formState += 1;
-    }
-
-    let doubleCheck = () =>
-      password === passwordCheck
-        ? true
-        : (() => {
-            formState = 0;
-            setWarning("確認的密碼不一致");
-            setShowLoading(false);
-            setShowWarning(true);
-          })();
-
-    formState === 4 ? doubleCheck() : (formState = 0);
-
-    let error = () => {
+    const error = () => {
       setWarning("註冊資料錯誤");
       setShowLoading(false);
       setShowWarning(true);
     };
 
-    let value;
-    formState === 4
-      ? (value = {
-          username: username,
-          email: email,
-          password: password,
-          error: error,
-        })
-      : console.log("error");
+    const value = {
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      error: error,
+    };
 
-    formState === 4 ? HTTP.register(value) : console.log("error");
+    HTTP.register(value);
   };
 
   return (
     <Background>
+      <ScrollToTop />
       <Wrap>
         註冊帳戶
         <RegisterData>
-          <label>
-            電子郵件：
-            <input type="text" name="email" id="email" />
-          </label>
-          <label>
-            帳號：
-            <input type="text" name="username" id="username" />
-          </label>
-          <label>
-            密碼：
-            <input type={passwordState} name="password" id="password" />
-          </label>
-          <label>
-            再次輸入密碼：
-            <input type={passwordState} id="passwordCheck" />
-          </label>
-          <img
-            src={process.env.PUBLIC_URL + `/icon/${eye}.png`}
-            alt="..."
-            onClick={() => setEyeState()}
-          />
-          <RegisterBtn type="submit" value="" onClick={() => getFormValue()}>
-            確認註冊
-          </RegisterBtn>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label style={{ position: "relative" }}>
+              電子郵件：
+              <input id="email" {...register("email", { required: "*必填" })} />
+              {!!errors.email && (
+                <AlertMessageEmail>{errors.email.message}</AlertMessageEmail>
+              )}
+            </label>
+            <label style={{ position: "relative" }}>
+              帳號：
+              <input
+                id="username"
+                {...register("username", { required: "*必填" })}
+              />
+              {!!errors.username && (
+                <AlertMessageUsername>
+                  {errors.username.message}
+                </AlertMessageUsername>
+              )}
+            </label>
+            <label style={{ position: "relative" }}>
+              密碼：
+              <input
+                type={passwordState}
+                id="password"
+                {...register("password", { required: "*必填" })}
+              />
+              <img
+                src={process.env.PUBLIC_URL + `/icon/${eye}.png`}
+                alt="..."
+                onClick={() => setEyeState()}
+              />
+              {!!errors.password && (
+                <AlertMessagePassword>
+                  {errors.password.message}
+                </AlertMessagePassword>
+              )}
+            </label>
+            <label style={{ position: "relative" }}>
+              再次輸入密碼：
+              <input
+                type={passwordState}
+                id="passwordCheck"
+                {...register("passwordCheck", {
+                  validate: (value) =>
+                    value === watch("password") || "密碼不一致",
+                })}
+              />
+              {!!errors.passwordCheck && (
+                <AlertMessagePasswordCheck>
+                  {errors.passwordCheck.message}
+                </AlertMessagePasswordCheck>
+              )}
+            </label>
+            <RegisterBtn type="submit" value="確認註冊" />
+          </form>
+
           <Block />
         </RegisterData>
       </Wrap>

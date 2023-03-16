@@ -25,27 +25,38 @@ const ImgBackground = styled.div`
   max-height: 220px;
   min-height: 198px;
   margin: auto;
+  position: relative;
 `;
 
 const ItemText = styled.div`
   margin-top: 5px;
 
   & p {
-    font-size: 0.8rem;
-    line-height: 1.6rem;
+    font-size: 1.2rem;
+    line-height: 2rem;
     margin-left: 2px;
     color: black;
   }
 `;
 
+const NewProductLabel = styled.img`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+`
+
 function Card(props) {
   const productData = props.data;
+  const label = props.label;
 
   return (
     <CustomCol>
       <Link to={`/Product_detail/${productData.gender}/${productData.id}`}>
         <ImgBackground>
-          <img src={`https://henry-wu-1130.com:4000/uploads/${productData.img}`} alt="..." />
+          {label === "new" ? <NewProductLabel src={process.env.PUBLIC_URL + "/icon/new-label.png"} alt="..." /> : false}
+          <img src={`${process.env.REACT_APP_API_URL}/uploads/${productData.img}`} alt="..." />
 
           <ItemText>
             <p>
