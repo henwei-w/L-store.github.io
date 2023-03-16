@@ -224,7 +224,7 @@ const CustomDropdownToggle = styled(Dropdown.Toggle)`
 
 const CustomDropDownMenu = styled(Dropdown.Menu)`
   border-radius: 3;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   padding: 0px;
   padding-top: 1.5rem;
 `;
@@ -284,7 +284,7 @@ function Header() {
     } else {
       setIcon("user");
       setPath("#/login");
-      setItem("登入");
+      setItem("管理員登入");
       setName("");
       setLogoutItem("");
     }

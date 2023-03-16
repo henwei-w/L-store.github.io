@@ -170,7 +170,7 @@ function Login() {
     <Background tabIndex={0}>
       <ScrollToTop />
       <Wrap>
-        登入
+        管理員登入
         <LoginData>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label style={{ position: "relative" }}>
@@ -210,7 +210,7 @@ function Login() {
         </LoginData>
         <Hr />
         <Register>
-          還沒加入會員?
+          註冊管理員帳號
           <Link to="/register">註冊</Link>
           <Block />
         </Register>

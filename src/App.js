@@ -9,7 +9,7 @@ import ProductDetail from "pages/ProductDetail";
 import Footer from "components/Layout/Footer";
 import Information from "./pages/Checkout/Information";
 import Login from "pages/Login";
-import Register from "./pages/Register";
+import Verify from "pages/Register/Verify";
 import ImageSource from "./assets/ImageSource";
 import Backstage from "./pages/Management/Backstage";
 import NotFound from "pages/NotFound";
@@ -30,7 +30,7 @@ function App() {
 
           <Route path="/login" element={<Login />} />
 
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<Verify />} />
 
           <Route path="/imgsource" element={<ImageSource />} />
 
