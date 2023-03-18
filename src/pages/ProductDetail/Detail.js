@@ -190,11 +190,6 @@ const cartAnime = keyframes`
     top: ${(props) => props.animePosition.top}px;
     right: ${(props) => props.animePosition.right}px;
   }
-  50% {
-    opacity: 0.8;
-    top: 150px;
-    right: 60vw;
-  }
   100% {
     opacity: 0.8;
     top: 0px;
@@ -207,11 +202,6 @@ const cartAnimeMobile = keyframes`
     opacity: 0.8;
     top: ${(props) => props.animePosition.top}px;
     right: ${(props) => props.animePosition.right}px;
-  }
-  50% {
-    opacity: 0.8;
-    top: 150px;
-    right: 40vw;
   }
   100% {
     opacity: 0.8;
@@ -300,7 +290,7 @@ function Detail(props) {
   const handleShow = (parameter, e) => {
     setAnimePosition({
       top: e.clientY,
-      right: document.body.clientWidth - e.clientX
+      right: document.body.clientWidth - e.clientX,
     });
     parameter === "成功加入購物車"
       ? setAnimeState("action")
