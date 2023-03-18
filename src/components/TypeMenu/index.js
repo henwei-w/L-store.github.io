@@ -6,7 +6,7 @@ const Menu = styled.div`
 `;
 
 const WpMenu = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 80px;
   background-color: rgb(245, 245, 245);
   position: fixed;

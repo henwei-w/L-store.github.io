@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
+import { useForm } from "react-hook-form";
 
 const Background = styled.div`
   padding: 30px;
@@ -23,7 +24,12 @@ const Form = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 235px;
+  margin: auto;
+
+  @media screen and (min-width: 576px) {
+    width: 270px;
+  }
 `;
 
 const Basic = styled.div`
@@ -33,7 +39,7 @@ const Basic = styled.div`
   margin-top: 50px;
 
   & label {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     font-size: 1.1rem;
   }
 `;
@@ -78,6 +84,7 @@ const Store = styled.div.attrs({ className: "store" })`
 const Submit = styled.input`
   width: 200px;
   height: 50px;
+  margin: auto;
   position: relative;
   top: 100px;
   font-size: 1.6rem;
@@ -99,24 +106,92 @@ const Block = styled.div`
   height: 100px;
 `;
 
+const AlertMessageName = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 80px;
+
+  @media screen and (min-width: 576px) {
+    left: 92px;
+  }
+`;
+
+const AlertMessagePhoneNumber = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 80px;
+
+  @media screen and (min-width: 576px) {
+    left: 92px;
+  }
+`;
+
+const AlertMessageEmail = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 80px;
+
+  @media screen and (min-width: 576px) {
+    left: 92px;
+  }
+`;
+
+const AlertMessageAddress = styled.div`
+  font-size: 16px;
+  color: red;
+  position: absolute;
+  top: 33px;
+  left: 40px;
+
+  @media screen and (min-width: 576px) {
+    left: 46px;
+  }
+`;
+
 function Information() {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data)
+  }
+
   return (
     <Background>
       <Info>
         配送資料
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Basic>
-            <label>
+            <label style={{ position: "relative" }}>
               姓名：
-              <input type="text" />
+              <input {...register("name", { required: "*必填" })} />
+              {!!errors.name && (
+                <AlertMessageName>{errors.name.message}</AlertMessageName>
+              )}
             </label>
-            <label>
+            <label style={{ position: "relative" }}>
               電話：
-              <input type="text" />
+              <input {...register("phoneNumber", { required: "*必填" })} />
+              {!!errors.phoneNumber && (
+                <AlertMessagePhoneNumber>{errors.phoneNumber.message}</AlertMessagePhoneNumber>
+              )}
             </label>
-            <label>
+            <label style={{ position: "relative" }}>
               電子郵件：
-              <input type="text" />
+              <input {...register("email", { required: "*必填" })} />
+              {!!errors.email && (
+                <AlertMessageEmail>{errors.email.message}</AlertMessageEmail>
+              )}
             </label>
           </Basic>
 
@@ -138,9 +213,12 @@ function Information() {
             />
             <label htmlFor="convenient">超商取貨</label>
             <Address>
-              <label>
+              <label style={{ position: "relative" }}>
                 地址：
-                <input type="text" />
+                <input {...register("address", { required: "*必填" })} />
+                {!!errors.address && (
+                <AlertMessageAddress>{errors.address.message}</AlertMessageAddress>
+              )}
               </label>
             </Address>
             <Store>

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import TypeMenu from "components/TypeMenu";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { addOrder } from "../../reducer/cartDataSlice";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import ScrollToTop from "helpers/ScrollToTop";
+import Modal from "react-bootstrap/Modal";
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -177,6 +178,65 @@ const CustomButton = styled.ul`
   }
 `;
 
+const CustomModalBody = styled(Modal.Body)`
+  padding: 50px;
+  font-size: 1.3rem;
+  text-align: center;
+`;
+
+const cartAnime = keyframes`
+  0% {
+    opacity: 0.8;
+    top: ${(props) => props.animePosition.top}px;
+    right: ${(props) => props.animePosition.right}px;
+  }
+  50% {
+    opacity: 0.8;
+    top: 150px;
+    right: 60vw;
+  }
+  100% {
+    opacity: 0.8;
+    top: 0px;
+    right: 30vw;
+  }
+`;
+
+const cartAnimeMobile = keyframes`
+  0% {
+    opacity: 0.8;
+    top: ${(props) => props.animePosition.top}px;
+    right: ${(props) => props.animePosition.right}px;
+  }
+  50% {
+    opacity: 0.8;
+    top: 150px;
+    right: 40vw;
+  }
+  100% {
+    opacity: 0.8;
+    top: 0px;
+    right: 10vw;
+  }
+`;
+
+const CartAnimeImg = styled.img`
+  width: 50px;
+  height: 75px;
+  opacity: 0;
+  position: fixed;
+  top: ${(props) => props.animePosition.top}px;
+  right: ${(props) => props.animePosition.right}px;
+  animation: ${(props) => (props.animeState === "action" ? cartAnime : false)}
+    0.35s linear;
+
+  @media screen and (min-width: 576px) {
+    animation: ${(props) =>
+        props.animeState === "action" ? cartAnimeMobile : false}
+      0.35s linear;
+  }
+`;
+
 function Detail(props) {
   const dispatch = useDispatch();
 
@@ -222,16 +282,44 @@ function Detail(props) {
       setOrderValue(true);
     };
     orderState
-      ? setCart(order) || alert("成功加入購物車")
-      : alert("請選擇顏色及尺寸") || cancel(e);
+      ? setCart(order) || handleShow("成功加入購物車", e)
+      : handleShow("請選擇顏色及尺寸", e) || cancel(e);
   }
 
   const orderState = orderColor && orderSize && "ready";
+
+  const [show, setShow] = useState(false);
+  const [alertState, setAlertState] = useState();
+  const [animePosition, setAnimePosition] = useState({
+    top: "0px",
+    right: "0px",
+  });
+  const [animeState, setAnimeState] = useState("static");
+
+  const handleClose = () => setShow(false);
+  const handleShow = (parameter, e) => {
+    setAnimePosition({
+      top: e.clientY,
+      right: document.body.clientWidth - e.clientX
+    });
+    parameter === "成功加入購物車"
+      ? setAnimeState("action")
+      : setAnimeState("static");
+    setTimeout(() => {
+      setAnimeState("static");
+      setShow(true);
+    }, 355);
+    setAlertState(parameter);
+  };
 
   return (
     <>
       <ScrollToTop />
       <TypeMenu path={data.gender} menu={menuTitle} />
+
+      <Modal show={show} onHide={handleClose} centered>
+        <CustomModalBody>{alertState}</CustomModalBody>
+      </Modal>
 
       <DetailContainer>
         <DetailWrap>
@@ -307,7 +395,16 @@ function Detail(props) {
             <CustomButton>
               <Link to="#" onClick={(e) => set(e, order)}>
                 <li>加入購物車</li>
+                <div>
+                  <CartAnimeImg
+                    src={`${process.env.REACT_APP_API_URL}/uploads/${data.img}`}
+                    alt="..."
+                    animePosition={animePosition}
+                    animeState={animeState}
+                  />
+                </div>
               </Link>
+
               <Link
                 to="/cart"
                 onClick={(e) =>
