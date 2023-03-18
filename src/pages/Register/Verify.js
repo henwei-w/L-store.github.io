@@ -5,6 +5,7 @@ import * as HTTP from "services/api";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Register from ".";
+import ScrollToTop from "helpers/ScrollToTop";
 
 const Wrap = styled.div`
   padding: 30px;
@@ -84,6 +85,7 @@ function Verify() {
         <Register />
       ) : (
         <Wrap>
+          <ScrollToTop />
           <Form onSubmit={handleSubmit(onSubmit)}>
             <label style={{ position: "relative" }}>
               驗證碼：
