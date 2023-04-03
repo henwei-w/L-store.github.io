@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/L-store.github.io/static/css/main.ccd08725.css",
-    "main.js": "/L-store.github.io/static/js/main.0aaf399c.js",
+    "main.js": "/L-store.github.io/static/js/main.a2b89915.js",
     "index.html": "/L-store.github.io/index.html",
     "main.ccd08725.css.map": "/L-store.github.io/static/css/main.ccd08725.css.map",
-    "main.0aaf399c.js.map": "/L-store.github.io/static/js/main.0aaf399c.js.map"
+    "main.a2b89915.js.map": "/L-store.github.io/static/js/main.a2b89915.js.map"
   },
   "entrypoints": [
     "static/css/main.ccd08725.css",
-    "static/js/main.0aaf399c.js"
+    "static/js/main.a2b89915.js"
   ]
 }
